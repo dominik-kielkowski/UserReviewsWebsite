@@ -1,0 +1,65 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using RecipeBookAPI.Database.Data;
+using System.Collections.Generic;
+using UserReviewsWebsiteAPI.Database.Models;
+using UserReviewsWebsiteAPI.Services;
+
+namespace UserReviewsWebsiteAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserController : ControllerBase
+    {
+        private readonly IUserService _service;
+
+        public UserController(IUserService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet]
+        public ActionResult GetUsers()
+        {
+            IEnumerable<User> users = _service.GetUsers();
+            return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult GetUser(int id)
+        {
+            User user = _service.GetUser(id);
+            return Ok(user);
+        }
+
+        [HttpGet("login")]
+        public ActionResult loginUser(User user)
+        {
+            string token = _service.GenerateJwt(user);
+            return Ok(token);
+        }
+
+        [HttpPost]
+        public ActionResult RegisterUser(User user)
+        {
+            _service.RegisterUser(user);
+            return Ok();
+        }
+
+        [HttpPut]
+        public ActionResult UpdateUser(int id, User user)
+        {
+            _service.UpdateUser(id, user);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteUser(int id)
+        {
+            _service.DeleteUser(id);
+            return Ok();
+        }
+
+
+    }
+}
