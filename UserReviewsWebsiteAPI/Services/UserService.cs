@@ -74,6 +74,7 @@ namespace UserReviewsWebsiteAPI.Services
                 DateOfBirth = createUser.DateOfBirth,
                 Nationality = createUser.Nationality
             };
+
             var hashedPassword = _passwordHasher.HashPassword(user, createUser.PasswordHash);
 
             user.PasswordHash = hashedPassword;

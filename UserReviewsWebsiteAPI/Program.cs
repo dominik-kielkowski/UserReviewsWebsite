@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RecipeBookAPI.Database.Data;
 using System.Text;
 using UserReviewsWebsiteAPI;
+using UserReviewsWebsiteAPI.Authorization;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Services;
 
@@ -45,10 +47,13 @@ builder.Services.AddAuthentication(option =>
     };
 });
 
-builder.Services.AddScoped<IUserService,UserService>();
+builder.Services.AddScoped<IUserContextService, UserContextService>();
+builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

@@ -1,4 +1,6 @@
-﻿using RecipeBookAPI.Database.Data;
+﻿using Microsoft.AspNetCore.Authorization;
+using RecipeBookAPI.Database.Data;
+using UserReviewsWebsiteAPI.Authorization;
 using UserReviewsWebsiteAPI.Database.Models;
 
 namespace UserReviewsWebsiteAPI.Services
@@ -6,10 +8,14 @@ namespace UserReviewsWebsiteAPI.Services
     public class ReviewService : IReviewService
     {
         private readonly ApplicationDbContext _db;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly IUserContextService _userContextService;
 
-        public ReviewService(ApplicationDbContext db)
+        public ReviewService(ApplicationDbContext db, IAuthorizationService authorizationService, IUserContextService userContextService)
         {
             _db = db;
+            _authorizationService = authorizationService;
+            _userContextService = userContextService;
         }
 
         public IEnumerable<Review> GetReviews()
@@ -29,7 +35,8 @@ namespace UserReviewsWebsiteAPI.Services
         public void AddReview(Review createReview)
         {
             Product product = _db.Products.FirstOrDefault(p => p.Id == createReview.ProductId);
-            User user = _db.Users.FirstOrDefault(p => p.Id == createReview.UserId);
+
+            User user = _db.Users.FirstOrDefault(p => p.Id == _userContextService.GetUserId);
 
             Review review = new Review
             {
@@ -48,6 +55,14 @@ namespace UserReviewsWebsiteAPI.Services
         {
             Review review = _db.Reviews.FirstOrDefault(p => p.Id == id);
 
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, review,
+                new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            if (!authorizationResult.Succeeded)
+            {
+                throw new Exception("Unotharized");
+            }
+
             //Product product = _db.Products.FirstOrDefault(p => p.Id == updateReview.ProductId);
             //User user = _db.Users.FirstOrDefault(p => p.Id == updateReview.UserId);
 
@@ -63,6 +78,14 @@ namespace UserReviewsWebsiteAPI.Services
         public void DeleteReview(int id)
         {
             Review review = _db.Reviews.FirstOrDefault(r => r.Id == id);
+
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, review,
+               new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            if (!authorizationResult.Succeeded)
+            {
+                throw new Exception("Unotharized");
+            }
 
             _db.Reviews.Remove(review);
             _db.SaveChanges();
