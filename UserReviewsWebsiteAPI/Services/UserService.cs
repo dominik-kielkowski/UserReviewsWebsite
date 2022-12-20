@@ -5,6 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using UserReviewsWebsiteAPI.Database.Models;
+using UserReviewsWebsiteAPI.Exceptions;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -25,12 +26,22 @@ namespace UserReviewsWebsiteAPI.Services
         {
             List<User> users = _db.Users.ToList();
 
+            if (users == null)
+            {
+                throw new NotFoundException("Users not found");
+            }
+
             return users;
         }
 
         public User GetUser(int id)
         {
             User user = _db.Users.FirstOrDefault(r => r.Id == id);
+
+            if (user == null)
+            {
+                throw new NotFoundException("User not found");
+            }
 
             return user;
         }
@@ -88,6 +99,11 @@ namespace UserReviewsWebsiteAPI.Services
         {
             User user = _db.Users.FirstOrDefault(r => r.Id == id);
 
+            if (user == null)
+            {
+                throw new NotFoundException("User not found");
+            }
+
             user.Username = updateUser.Username;
 
             _db.SaveChanges();
@@ -96,6 +112,11 @@ namespace UserReviewsWebsiteAPI.Services
         public void DeleteUser(int id)
         {
             User user = _db.Users.FirstOrDefault(r => r.Id == id);
+
+            if (user == null)
+            {
+                throw new NotFoundException("User not found");
+            }
 
             _db.Users.Remove(user);
             _db.SaveChanges();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RecipeBookAPI.Database.Data;
 using UserReviewsWebsiteAPI.Database.Models;
+using UserReviewsWebsiteAPI.Exceptions;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -17,12 +18,22 @@ namespace UserReviewsWebsiteAPI.Services
         {
             List<Product> products = _db.Products.ToList();
 
+            if(products == null)
+            {
+                throw new NotFoundException("Products not found");
+            }
+
             return products;
         }
 
         public Product GetProduct(int id)
         {
             Product product = _db.Products.FirstOrDefault(r => r.Id == id);
+
+            if (product == null)
+            {
+                throw new NotFoundException("Product not found");
+            }
 
             return product;
         }
@@ -50,6 +61,11 @@ namespace UserReviewsWebsiteAPI.Services
         {
             Product product = _db.Products.FirstOrDefault(r => r.Id == id);
 
+            if (product == null)
+            {
+                throw new NotFoundException("Product not found");
+            }
+
             product.Name = updateProduct.Name;
             product.Description = updateProduct.Description;
             product.AverageScore = updateProduct.AverageScore;
@@ -61,6 +77,11 @@ namespace UserReviewsWebsiteAPI.Services
         public void DeleteProduct(int id)
         {
             Product product = _db.Products.FirstOrDefault(r => r.Id == id);
+
+            if (product == null)
+            {
+                throw new NotFoundException("Product not found");
+            }
 
             _db.Products.Remove(product);
             _db.SaveChanges();

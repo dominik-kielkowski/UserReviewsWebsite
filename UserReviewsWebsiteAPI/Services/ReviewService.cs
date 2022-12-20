@@ -2,6 +2,7 @@
 using RecipeBookAPI.Database.Data;
 using UserReviewsWebsiteAPI.Authorization;
 using UserReviewsWebsiteAPI.Database.Models;
+using UserReviewsWebsiteAPI.Exceptions;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -22,12 +23,22 @@ namespace UserReviewsWebsiteAPI.Services
         {
             List<Review> reviews = _db.Reviews.ToList();
 
+            if (reviews == null)
+            {
+                throw new NotFoundException("Reviews not found");
+            }
+
             return reviews;
         }
 
         public Review GetReview(int id)
         {
             Review review = _db.Reviews.Find(id);
+
+            if (review == null)
+            {
+                throw new NotFoundException("Review not found");
+            }
 
             return review;
         }
@@ -55,6 +66,11 @@ namespace UserReviewsWebsiteAPI.Services
         {
             Review review = _db.Reviews.FirstOrDefault(p => p.Id == id);
 
+            if (review == null)
+            {
+                throw new NotFoundException("Review not found");
+            }
+
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, review,
                 new ResourceOperationRequirement(ResourceOperation.Update)).Result;
 
@@ -78,6 +94,11 @@ namespace UserReviewsWebsiteAPI.Services
         public void DeleteReview(int id)
         {
             Review review = _db.Reviews.FirstOrDefault(r => r.Id == id);
+
+            if (review == null)
+            {
+                throw new NotFoundException("Review not found");
+            }
 
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, review,
                new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
