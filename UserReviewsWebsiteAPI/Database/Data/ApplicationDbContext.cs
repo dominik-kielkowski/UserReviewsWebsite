@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UserReviewsWebsiteAPI.Database.Models;
 
-namespace RecipeBookAPI.Database.Data
+namespace UserReviewsWebsiteAPI.Database.Data
 {
     public class ApplicationDbContext : DbContext
     {

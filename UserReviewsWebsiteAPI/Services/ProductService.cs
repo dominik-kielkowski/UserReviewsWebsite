@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using RecipeBookAPI.Database.Data;
+using UserReviewsWebsiteAPI.Database.Data;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Exceptions;
 

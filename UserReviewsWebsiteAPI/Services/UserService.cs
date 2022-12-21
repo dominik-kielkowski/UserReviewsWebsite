@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using RecipeBookAPI.Database.Data;
+using UserReviewsWebsiteAPI.Database.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -53,7 +53,7 @@ namespace UserReviewsWebsiteAPI.Services
             var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginUser.PasswordHash);
             if(result == PasswordVerificationResult.Failed)
             {
-                return null;
+                throw (new WrongPasswordException("Incorrect password"));
             }
 
             var claims = new List<Claim>()

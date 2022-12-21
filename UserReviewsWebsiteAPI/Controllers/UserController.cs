@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using RecipeBookAPI.Database.Data;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Services;
 

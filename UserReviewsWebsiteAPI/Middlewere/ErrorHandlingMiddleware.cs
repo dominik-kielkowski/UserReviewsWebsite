@@ -10,6 +10,11 @@ namespace UserReviewsWebsiteAPI.Middlewere
             {
                 await next.Invoke(context);
             }
+            catch (WrongPasswordException wrongPasswordException)
+            {
+                context.Response.StatusCode = 401;
+                await context.Response.WriteAsync(wrongPasswordException.Message);
+            }
             catch (NotFoundException notFoundException)
             {
                 context.Response.StatusCode = 404;
