@@ -28,6 +28,8 @@ namespace UserReviewsWebsiteAPI.Database.Models.Validators
                     context.AddFailure("Email", "That email is already taken");
                 }
             });
+
+            RuleFor(x => x.PasswordHash).NotEmpty().MinimumLength(6);
         }
     }
 }

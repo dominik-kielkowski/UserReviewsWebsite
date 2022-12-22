@@ -15,6 +15,8 @@ using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 // Add services to the container.
 
 
@@ -26,6 +28,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+// Enable CORS
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: myAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://example.com").AllowAnyMethod().AllowAnyHeader();
+                      });
 });
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
@@ -76,6 +89,8 @@ app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthentication();
 
 app.UseHttpsRedirection();
+
+app.UseCors(myAllowSpecificOrigins);
 
 app.UseAuthorization();
 
