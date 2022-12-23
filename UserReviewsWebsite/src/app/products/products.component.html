@@ -1,0 +1,19 @@
+<table class="table table-striped">
+    <thead>
+        <th>Image</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Descryption</th>
+        <th>AverageScore</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of productsList$|async">
+            <td><img src="{{item.imagePath}}" width="200" height="auto"></td>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.categoryId}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.averageScore}}</td>
+        </tr>
+    </tbody>
+</table>

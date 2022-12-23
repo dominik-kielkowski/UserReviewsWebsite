@@ -35,10 +35,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: myAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("http://example.com").AllowAnyMethod().AllowAnyHeader();
-                      });
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
 });
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();

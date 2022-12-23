@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using UserReviewsWebsiteAPI.Database.Data;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Exceptions;
@@ -16,7 +17,7 @@ namespace UserReviewsWebsiteAPI.Services
 
         public IEnumerable<Product> GetProducts()
         {
-            List<Product> products = _db.Products.ToList();
+            List<Product> products = _db.Products.Include(r => r.Category).ToList();
 
             if(products == null)
             {
