@@ -10,6 +10,7 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductItemComponent } from './products/product-list/product-item/product-item.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [ProductApiService],
   bootstrap: [AppComponent]

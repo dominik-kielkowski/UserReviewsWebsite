@@ -16,7 +16,7 @@ export class ProductApiService {
   }
 
   GetProduct(id: number): Observable<any> {
-    return this.http.get<any>(this.productAPIUrl + '/Product/${id}');
+    return this.http.get<any>(this.productAPIUrl + `/Product/${id}`);
   }
 
   AddProduct(data: any): Observable<any> {
@@ -24,7 +24,7 @@ export class ProductApiService {
   }
 
   UpdateProduct(id: number | string, data: any) {
-    return this.http.put(this.productAPIUrl + '/Product/${id}', data);
+    return this.http.put(this.productAPIUrl + '/Product/${ id }', data);
   }
 
   DeleteProduct(id: number | string) {
