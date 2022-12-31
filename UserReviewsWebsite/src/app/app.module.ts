@@ -11,6 +11,10 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ProductItemComponent } from './products/product-list/product-item/product-item.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { UserApiService } from './user-api.service';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { ReviewListComponent } from './products/product-details/review-list/review-list.component';
+import { ReviewItemComponent } from './products/product-details/review-list/review-item/review-item.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,10 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     ProductDetailsComponent,
     ProductListComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    AuthenticationComponent,
+    ReviewListComponent,
+    ReviewItemComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +34,9 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [ProductApiService],
+  providers: [
+    ProductApiService,
+    UserApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

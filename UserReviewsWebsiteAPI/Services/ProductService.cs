@@ -16,7 +16,7 @@ namespace UserReviewsWebsiteAPI.Services
 
         public IEnumerable<Product> GetProducts()
         {
-            List<Product> products = _db.Products.ToList();
+            List<Product> products = _db.Products.Include(r => r.Reviews).ToList();
 
             if(products == null)
             {

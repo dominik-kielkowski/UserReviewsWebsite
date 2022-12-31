@@ -1,16 +1,14 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationComponent } from './authentication/authentication.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: ProductsComponent },
-  {
-    path: 'product', component: ProductDetailsComponent, children: [{
-      path: ':id', component: ProductDetailsComponent
-    }]
-  }
+  { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'authentication', component: AuthenticationComponent }
 ]
 
 @NgModule({

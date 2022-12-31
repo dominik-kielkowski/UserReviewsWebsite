@@ -6,7 +6,7 @@ namespace UserReviewsWebsiteAPI.Services
     {
         void AddReview(Review createReview);
         void DeleteReview(int id);
-        Review GetReview(int id);
+        IEnumerable<Review> GetReview(int id);
         IEnumerable<Review> GetReviews();
         void UpdateReview(int id, Review updateReview);
     }

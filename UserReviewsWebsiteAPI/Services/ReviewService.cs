@@ -3,6 +3,7 @@ using UserReviewsWebsiteAPI.Database.Data;
 using UserReviewsWebsiteAPI.Authorization;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -31,16 +32,16 @@ namespace UserReviewsWebsiteAPI.Services
             return reviews;
         }
 
-        public Review GetReview(int id)
+        public IEnumerable<Review> GetReview(int id)
         {
-            Review review = _db.Reviews.Find(id);
+            List<Review> reviews = _db.Reviews.Include(r => r.User).Where(x => x.ProductId == id).ToList();
 
-            if (review == null)
+            if (reviews == null)
             {
                 throw new NotFoundException("Review not found");
             }
 
-            return review;
+            return reviews;
         }
 
         public void AddReview(Review createReview)

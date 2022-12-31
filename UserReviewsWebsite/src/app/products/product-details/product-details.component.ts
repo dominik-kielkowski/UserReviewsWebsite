@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs';
 import { ProductApiService } from 'src/app/product-api.service';
 
 @Component({
@@ -17,7 +16,7 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
-      this.product = this.service.GetProduct(this.id).subscribe();
+      this.service.GetProduct(this.id).subscribe((product) => { this.product = product });
 
     })
   };

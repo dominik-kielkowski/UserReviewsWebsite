@@ -1,10 +1,14 @@
-<div class="card" style="width: 18rem; display: inline-flex; ">
-    <img class="card-img-top" src="{{product.imagePath}}" alt="Card image cap">
-    <div class="card-body">
-        <h5 class="card-title">{{product.name}}</h5>
-        <p class="card-text">{{product.description}}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+<div>
+    <div class="card" style="width: 18rem;">
+        <img class=" card-img-top" src="{{product.imagePath}}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.description}}</p>
+            <a routerLink="" class="btn btn-primary">Add review</a>
+        </div>
+    </div>
+    <div>
+        <app-review-list></app-review-list>
+
     </div>
 </div>
-
-<h1>{{product.name}}</h1>

@@ -24,11 +24,11 @@ export class ProductApiService {
   }
 
   UpdateProduct(id: number | string, data: any) {
-    return this.http.put(this.productAPIUrl + '/Product/${ id }', data);
+    return this.http.put(this.productAPIUrl + `/Product/${id}`, data);
   }
 
   DeleteProduct(id: number | string) {
-    return this.http.delete(this.productAPIUrl + '/Product/${id}');
+    return this.http.delete(this.productAPIUrl + `/Product/${id}`);
   }
 
 }

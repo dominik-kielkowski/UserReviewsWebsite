@@ -28,7 +28,7 @@ namespace UserReviewsWebsiteAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult GetReview(int id)
         {
-            Review review = _service.GetReview(id);
+            IEnumerable<Review> review = _service.GetReview(id);
 
             return Ok(review);
         }
