@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using UserReviewsWebsiteAPI.Services;
@@ -16,17 +18,19 @@ namespace UserReviewsWebsiteAPI.Controllers
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet("a")]
         public ActionResult GetUsers()
         {
             IEnumerable<User> users = _service.GetUsers();
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult GetUser(int id)
-        {
-            User user = _service.GetUser(id);
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetUser()
+         {
+            string userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            User user = _service.GetUser(userId);
             return Ok(user);
         }
 

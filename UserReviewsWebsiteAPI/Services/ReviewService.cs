@@ -4,6 +4,7 @@ using UserReviewsWebsiteAPI.Authorization;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using UserReviewsWebsiteAPI.Database.Models.Dtos;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -44,11 +45,11 @@ namespace UserReviewsWebsiteAPI.Services
             return reviews;
         }
 
-        public void AddReview(Review createReview)
+        public void AddReview(CreateReviewDto createReview)
         {
             Product product = _db.Products.FirstOrDefault(p => p.Id == createReview.ProductId);
 
-            User user = _db.Users.FirstOrDefault(p => p.Id == _userContextService.GetUserId);
+            User user = _db.Users.FirstOrDefault(p => p.Id == createReview.UserId);
 
             Review review = new Review
             {

@@ -18,4 +18,6 @@ export class ReviewApiService {
   AddReview(data: any): Observable<any> {
     return this.http.post(this.productAPIUrl + '/Review', data);
   }
+
+
 }

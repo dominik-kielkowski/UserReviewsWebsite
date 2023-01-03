@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserReviewsWebsiteAPI.Database.Models;
+using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using UserReviewsWebsiteAPI.Services;
 
 namespace UserReviewsWebsiteAPI.Controllers
@@ -34,7 +35,7 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddReview(Review createReview)
+        public ActionResult AddReview(CreateReviewDto createReview)
         {
             _service.AddReview(createReview);
 

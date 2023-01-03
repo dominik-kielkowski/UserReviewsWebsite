@@ -8,7 +8,7 @@ namespace UserReviewsWebsiteAPI.Services
         void RegisterUser(User createUser);
         string GenerateJwt(LoginDto loginUser);
         void DeleteUser(int id);
-        User GetUser(int id);
+        User GetUser(string id);
         IEnumerable<User> GetUsers();
         void UpdateUser(int id, User updateUser);
     }

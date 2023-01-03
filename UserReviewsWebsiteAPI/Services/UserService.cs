@@ -35,9 +35,10 @@ namespace UserReviewsWebsiteAPI.Services
             return users;
         }
 
-        public User GetUser(int id)
+        public User GetUser(string id)
         {
-            User user = _db.Users.FirstOrDefault(r => r.Id == id);
+            int userId = Convert.ToInt32(id);
+            User user = _db.Users.FirstOrDefault(x => x.Id == userId);
 
             if (user == null)
             {
