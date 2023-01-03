@@ -14,4 +14,8 @@ export class ReviewApiService {
   GetReviews(id: number): Observable<any[]> {
     return this.http.get<any>(`${this.productAPIUrl}/Review/${id}`)
   }
+
+  AddReview(data: any): Observable<any> {
+    return this.http.post(this.productAPIUrl + '/Review', data);
+  }
 }

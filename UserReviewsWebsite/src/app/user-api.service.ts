@@ -12,6 +12,6 @@ export class UserApiService {
   constructor(private http: HttpClient) { }
 
   LoginUser(data: any): Observable<any> {
-    return this.http.get<any>(`${this.productAPIUrl}/User/login`)
+    return this.http.post<any>(`${this.productAPIUrl}/User/login`, data)
   }
 }

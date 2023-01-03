@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Exceptions;
+using UserReviewsWebsiteAPI.Database.Models.Dtos;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -46,7 +47,7 @@ namespace UserReviewsWebsiteAPI.Services
             return user;
         }
 
-        public string GenerateJwt(User loginUser)
+        public string GenerateJwt(LoginDto loginUser)
         {
             var user = _db.Users.FirstOrDefault(u => u.Email == loginUser.Email);
 

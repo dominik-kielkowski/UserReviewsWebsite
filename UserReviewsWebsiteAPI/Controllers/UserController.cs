@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserReviewsWebsiteAPI.Database.Models;
+using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using UserReviewsWebsiteAPI.Services;
 
 namespace UserReviewsWebsiteAPI.Controllers
@@ -29,11 +30,11 @@ namespace UserReviewsWebsiteAPI.Controllers
             return Ok(user);
         }
 
-        [HttpGet("login")]
-        public ActionResult loginUser(User user)
+        [HttpPost("login")]
+        public ActionResult loginUser(LoginDto user)
         {
             string token = _service.GenerateJwt(user);
-            return Ok(token);
+            return Ok( new TokenDto { Token = token });
         }
 
         [HttpPost]
