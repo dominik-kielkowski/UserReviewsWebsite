@@ -23,33 +23,6 @@ export class ProductDetailsComponent implements OnInit {
       this.id = params['id'];
       this.service.GetProduct(this.id).subscribe((product) => { this.product = product });
     })
-
-
-    this.userService.GetUserProfile().subscribe(
-      res => {
-        console.log(res)
-        this.userDetails = res
-      },
-      err => {
-        console.log(err);
-      }
-    )
-
   };
 
-  addReview(form: NgForm) {
-    var review = {
-      Title: form.value.title,
-      ReviewBody: form.value.reviewBody,
-      Score: form.value.score,
-      ProductId: this.id,
-      UserId: this.userDetails.id
-    }
-
-
-    this.reviewService.AddReview(review).subscribe()
-    console.log(review);
-
-
-  }
 };

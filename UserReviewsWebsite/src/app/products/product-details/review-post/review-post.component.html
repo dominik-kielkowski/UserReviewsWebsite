@@ -1,0 +1,45 @@
+<div>
+    <div class="container my-5 py-5 text-dark">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-6">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div class="d-flex flex-start w-100">
+                            <div class="w-100">
+                                <form (ngSubmit)="addReview(f)" #f="ngForm">
+                                    <h5>Title</h5>
+                                    <div class="form-outline">
+                                        <input class="form-control" id="title" ngModel name="title" />
+                                    </div>
+                                    <h6>Score</h6>
+                                    <select id="score" ngModel name="score">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                    <h5>Add a comment</h5>
+                                    <div class="form-outline">
+                                        <input class="form-control" id="reviewBody" ngModel name="reviewBody" />
+                                        <label class="form-label" for="textAreaExample">What is your view?</label>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <button type="submit" class="btn btn-primary">
+                                            Post Review <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

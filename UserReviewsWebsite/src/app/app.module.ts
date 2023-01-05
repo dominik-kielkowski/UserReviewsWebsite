@@ -15,6 +15,8 @@ import { UserApiService } from './user-api.service';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { ReviewListComponent } from './products/product-details/review-list/review-list.component';
 import { ReviewItemComponent } from './products/product-details/review-list/review-item/review-item.component';
+import { ReviewPostComponent } from './products/product-details/review-post/review-post.component';
+import { ReviewApiService } from './review-api.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ReviewItemComponent } from './products/product-details/review-list/revi
     ProductItemComponent,
     AuthenticationComponent,
     ReviewListComponent,
-    ReviewItemComponent
+    ReviewItemComponent,
+    ReviewPostComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { ReviewItemComponent } from './products/product-details/review-list/revi
   ],
   providers: [
     ProductApiService,
-    UserApiService],
+    UserApiService,
+    ReviewApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

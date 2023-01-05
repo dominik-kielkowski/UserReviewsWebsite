@@ -105,6 +105,7 @@ namespace UserReviewsWebsiteAPI.Services
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, review,
                new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
 
+
             if (!authorizationResult.Succeeded)
             {
                 throw new Exception("Unotharized");

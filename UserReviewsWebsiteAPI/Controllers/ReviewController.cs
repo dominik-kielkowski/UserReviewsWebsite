@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
@@ -50,7 +51,8 @@ namespace UserReviewsWebsiteAPI.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [Authorize]
+        [HttpDelete("{id}")]
         public ActionResult DeleteReview(int id)
         {
             _service.DeleteReview(id);
