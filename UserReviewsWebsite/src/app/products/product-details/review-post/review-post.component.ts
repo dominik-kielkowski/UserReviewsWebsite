@@ -15,7 +15,6 @@ export class ReviewPostComponent implements OnInit {
   @Input() id: any;
   userDetails: any;
 
-
   ngOnInit(): void {
     this.userService.GetUserProfile().subscribe(
       res => {

@@ -24,4 +24,8 @@ export class ReviewApiService {
     return this.http.delete(`${this.productAPIUrl}/Review/${id}`, { headers: tokenHeader })
   }
 
+  EditReview(id: number, data: any): Observable<any> {
+    var tokenHeader = new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.put(this.productAPIUrl + `/Review/${id}`, data, { headers: tokenHeader });
+  }
 }

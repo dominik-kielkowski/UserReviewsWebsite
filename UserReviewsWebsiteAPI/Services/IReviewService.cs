@@ -9,6 +9,6 @@ namespace UserReviewsWebsiteAPI.Services
         void DeleteReview(int id);
         IEnumerable<Review> GetReview(int id);
         IEnumerable<Review> GetReviews();
-        void UpdateReview(int id, Review updateReview);
+        void UpdateReview(int id, CreateReviewDto updateReview);
     }
 }

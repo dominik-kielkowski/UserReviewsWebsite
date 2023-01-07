@@ -64,7 +64,7 @@ namespace UserReviewsWebsiteAPI.Services
             _db.SaveChanges();
         }
 
-        public void UpdateReview(int id, Review updateReview)
+        public void UpdateReview(int id, CreateReviewDto updateReview)
         {
             Review review = _db.Reviews.FirstOrDefault(p => p.Id == id);
 

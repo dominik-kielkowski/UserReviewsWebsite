@@ -43,8 +43,9 @@ namespace UserReviewsWebsiteAPI.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public ActionResult UpdateReview(int id, Review updateReview)
+        [Authorize]
+        [HttpPut("{id}")]
+        public ActionResult UpdateReview(int id, CreateReviewDto updateReview)
         {
             _service.UpdateReview(id, updateReview);
 
