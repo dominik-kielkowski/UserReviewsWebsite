@@ -1,0 +1,11 @@
+﻿namespace UserReviewsWebsiteAPI.Database.Models.Dtos
+{
+    public class RegisterDto
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string? Nationality { get; set; }
+        public string PasswordHash { get; set; }
+    }
+}

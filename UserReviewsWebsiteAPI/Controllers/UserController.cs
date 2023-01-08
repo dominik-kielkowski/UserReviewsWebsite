@@ -42,7 +42,7 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterUser(User user)
+        public ActionResult RegisterUser(RegisterDto user)
         {
             _service.RegisterUser(user);
             return Ok();

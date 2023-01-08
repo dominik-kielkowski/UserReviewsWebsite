@@ -78,7 +78,7 @@ namespace UserReviewsWebsiteAPI.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public void RegisterUser(User createUser)
+        public void RegisterUser(RegisterDto createUser)
         {
             User user = new User
             {

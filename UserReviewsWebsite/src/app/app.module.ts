@@ -12,11 +12,16 @@ import { ProductItemComponent } from './products/product-list/product-item/produ
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { UserApiService } from './user-api.service';
-import { AuthenticationComponent } from './authentication/authentication.component';
 import { ReviewListComponent } from './products/product-details/review-list/review-list.component';
 import { ReviewItemComponent } from './products/product-details/review-list/review-item/review-item.component';
 import { ReviewPostComponent } from './products/product-details/review-post/review-post.component';
 import { ReviewApiService } from './review-api.service';
+import { RegisterUserComponent } from './user/register-user/register-user.component';
+import { LoginUserComponent } from './user/login-user/login-user.component';
+import { ManagerPanelComponent } from './manager-panel/manager-panel.component';
+import { ManagementListComponent } from './manager-panel/management-list/management-list.component';
+import { ManagementItemComponent } from './manager-panel/management-list/management-item/management-item.component';
+import { ManagementDetailsComponent } from './manager-panel/management-details/management-details.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +31,15 @@ import { ReviewApiService } from './review-api.service';
     ProductDetailsComponent,
     ProductListComponent,
     ProductItemComponent,
-    AuthenticationComponent,
     ReviewListComponent,
     ReviewItemComponent,
-    ReviewPostComponent
+    ReviewPostComponent,
+    RegisterUserComponent,
+    LoginUserComponent,
+    ManagerPanelComponent,
+    ManagementListComponent,
+    ManagementItemComponent,
+    ManagementDetailsComponent
   ],
   imports: [
     BrowserModule,

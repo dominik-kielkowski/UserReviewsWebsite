@@ -20,4 +20,7 @@ export class UserApiService {
     return this.http.get(`${this.productAPIUrl}/User`, { headers: tokenHeader });
   }
 
+  RegisterUser(data: any) {
+    return this.http.post(`${this.productAPIUrl}/User`, data)
+  }
 }

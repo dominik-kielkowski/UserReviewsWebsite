@@ -13,10 +13,8 @@ import { UserApiService } from 'src/app/user-api.service';
 export class ProductDetailsComponent implements OnInit {
   id!: number;
   product: any;
-  userDetails: any;
 
-  constructor(private service: ProductApiService, private route: ActivatedRoute, private userService: UserApiService,
-    private reviewService: ReviewApiService) { }
+  constructor(private service: ProductApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {

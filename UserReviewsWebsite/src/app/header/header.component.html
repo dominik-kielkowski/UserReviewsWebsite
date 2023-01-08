@@ -1,9 +1,19 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/home">Home</a>
+        <div>
+            <a class="navbar-brand" routerLink="/home">Home</a>
+            <p *ngIf='token' class="text-light">Welcome {{userDetails.username}}!</p>
+        </div>
         <div>
             <ul class="navbar-nav navbar-right">
-                <li class="nav-item" type="button" class="btn btn-outline-warning" routerLink="/authentication">Sign In
+                <li class="nav-item" type="button" class="btn btn-outline-warning" routerLink="/manage">
+                    Manager Panel</li>
+                <li *ngIf='!token' class="nav-item" type="button" class="btn btn-outline-warning" routerLink="/login">
+                    Log In</li>
+                <li *ngIf='!token' class="nav-item" type="button" class="btn btn-outline-warning"
+                    routerLink="/register">
+                    Sign Up</li>
+                <li *ngIf='token' class="nav-item" type="button" class="btn btn-danger" (click)="onLogout()">Log Out
                 </li>
             </ul>
         </div>

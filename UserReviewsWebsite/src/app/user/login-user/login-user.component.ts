@@ -1,26 +1,19 @@
-import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserApiService } from '../user-api.service';
+import { UserApiService } from 'src/app/user-api.service';
 
 @Component({
-  selector: 'app-authentication',
-  templateUrl: './authentication.component.html',
-  styleUrls: ['./authentication.component.css']
+  selector: 'app-login-user',
+  templateUrl: './login-user.component.html',
+  styleUrls: ['./login-user.component.css']
 })
-export class AuthenticationComponent implements OnInit {
+export class LoginUserComponent implements OnInit {
   inLoginMode = true;
 
   constructor(private service: UserApiService, private routter: Router) { }
 
-
-  onSwitchMode() {
-    this.inLoginMode = !this.inLoginMode;
-  }
-
   onSubmit(form: NgForm) {
-    console.log(form.value);
     this.service.LoginUser(form.value).subscribe(
       (response: any) => {
         localStorage.setItem('token', response.token);
