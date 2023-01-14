@@ -1,20 +1,17 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <div>
-            <a class="navbar-brand" routerLink="/home">Home</a>
-            <p *ngIf='token' class="text-light">Welcome {{userDetails.username}}!</p>
+            <ul  class="nav">
+            <li><a class="navbar-brand" routerLink="/home">Home</a> </li>
+            <li><p *ngIf='token' class="text-light">Welcome {{userDetails.username}}!</p></li>
+            </ul>
         </div>
         <div>
-            <ul class="navbar-nav navbar-right">
-                <li class="nav-item" type="button" class="btn btn-outline-warning" routerLink="/manage">
-                    Manager Panel</li>
-                <li *ngIf='!token' class="nav-item" type="button" class="btn btn-outline-warning" routerLink="/login">
-                    Log In</li>
-                <li *ngIf='!token' class="nav-item" type="button" class="btn btn-outline-warning"
-                    routerLink="/register">
-                    Sign Up</li>
-                <li *ngIf='token' class="nav-item" type="button" class="btn btn-danger" (click)="onLogout()">Log Out
-                </li>
+            <ul class="nav">
+                <li class="nav-item btn btn-outline-warning" type="button" routerLink="/manage">Manager Panel</li>
+                <li *ngIf='!token' class="nav-item btn btn-outline-warning display: inline;" type="button" routerLink="/login">Log In</li>
+                <li *ngIf='!token' class="nav-item btn btn-outline-warning display: inline;" type="button" routerLink="/register">Sign Up</li>
+                <li *ngIf='token' class="nav-item btn btn-danger" type="button" (click)="onLogout()">Log Out</li>
             </ul>
         </div>
     </div>

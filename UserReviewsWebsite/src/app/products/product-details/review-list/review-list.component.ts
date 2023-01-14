@@ -19,9 +19,7 @@ export class ReviewListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
-      console.log(this.id);
       this.reviewList$ = this.service.GetReviews(this.id);
-      console.log(this.reviewList$);
     })
   }
 }

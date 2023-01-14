@@ -1,0 +1,22 @@
+    <div class="row d-flex justify-content-center">
+        <div class="row" >
+            <div class="col-xs-12">
+                <label for="imagePath">Image Path:</label>
+                <input type="text" name="imagePath" [(ngModel)]="imagePath">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <label for="productName">Title:</label>
+                <input type="text" name="productName" [(ngModel)]="productName">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <label for="productDescription">Description:</label>
+                <input type="text" name="productDescription" [(ngModel)]="productDescription">
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-danger" routerLink="/manage">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="onSaveChanges()">Save</button>

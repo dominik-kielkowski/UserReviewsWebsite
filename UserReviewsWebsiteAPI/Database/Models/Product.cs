@@ -11,8 +11,6 @@ namespace UserReviewsWebsiteAPI.Database.Models
         public string ImagePath { get; set; }
         public float AverageScore { get; set; }
 
-        public Category Category { get; set; }
-
         public List<Review> Reviews { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace UserReviewsWebsiteAPI.Services
 {
     public interface IProductService
     {
-        void AddProduct(Product createProduct);
+        void AddProduct(ProductDto createProduct);
         void DeleteProduct(int id);
         Product GetProduct(int id);
         IEnumerable<Product> GetProducts();

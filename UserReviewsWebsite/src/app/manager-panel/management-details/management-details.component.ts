@@ -23,7 +23,6 @@ export class ManagementDetailsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       this.productService.GetProduct(this.id).subscribe((product) => { this.product = product });
-      console.log(this.product)
     });
   };
 
@@ -39,18 +38,15 @@ export class ManagementDetailsComponent implements OnInit {
       Name: this.productName,
       ImagePath: this.imagePath,
       Description: this.productDescription,
-      CategoryId: 3,
       AverageScore: 10
     }
 
-    console.log(product)
     this.productService.UpdateProduct(this.id, product).subscribe()
 
     this.inEditMode = !this.inEditMode
   }
 
   onDeleteProduct() {
-      console.log(this.id)
       this.productService.DeleteProduct(this.id).subscribe()
   }
   }

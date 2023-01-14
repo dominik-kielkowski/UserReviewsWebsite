@@ -15,9 +15,7 @@ export class RegisterUserComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value)
     this.userService.RegisterUser(form.value).subscribe()
-
   }
 
 }

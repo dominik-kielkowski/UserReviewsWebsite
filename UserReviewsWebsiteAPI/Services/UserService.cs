@@ -80,12 +80,14 @@ namespace UserReviewsWebsiteAPI.Services
 
         public void RegisterUser(RegisterDto createUser)
         {
+            Role role = _db.Role.FirstOrDefault(r => r.Id == 1);
+
+
             User user = new User
             {
                 Username = createUser.Username,
                 Email = createUser.Email,
-                DateOfBirth = createUser.DateOfBirth,
-                Nationality = createUser.Nationality
+                Role = role
             };
 
             var hashedPassword = _passwordHasher.HashPassword(user, createUser.PasswordHash);

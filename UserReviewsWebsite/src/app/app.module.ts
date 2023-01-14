@@ -22,6 +22,7 @@ import { ManagerPanelComponent } from './manager-panel/manager-panel.component';
 import { ManagementListComponent } from './manager-panel/management-list/management-list.component';
 import { ManagementItemComponent } from './manager-panel/management-list/management-item/management-item.component';
 import { ManagementDetailsComponent } from './manager-panel/management-details/management-details.component';
+import { ProductAddComponent } from './manager-panel/product-add/product-add.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ManagementDetailsComponent } from './manager-panel/management-details/m
     ManagerPanelComponent,
     ManagementListComponent,
     ManagementItemComponent,
-    ManagementDetailsComponent
+    ManagementDetailsComponent,
+    ProductAddComponent
   ],
   imports: [
     BrowserModule,

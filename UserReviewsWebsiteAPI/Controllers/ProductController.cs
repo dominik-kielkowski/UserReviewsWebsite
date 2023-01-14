@@ -32,7 +32,7 @@ namespace UserReviewsWebsiteAPI.Controllers
 
 
         [HttpPost]
-        public ActionResult AddProduct(Product product)
+        public ActionResult AddProduct(ProductDto product)
         {
             _service.AddProduct(product);
             return Ok();

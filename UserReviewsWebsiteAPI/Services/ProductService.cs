@@ -29,7 +29,7 @@ namespace UserReviewsWebsiteAPI.Services
 
         public Product GetProduct(int id)
         {
-            Product product = _db.Products.Include(r => r.Category).FirstOrDefault(r => r.Id == id);
+            Product product = _db.Products.FirstOrDefault(r => r.Id == id);
 
             if (product == null)
             {
@@ -39,10 +39,8 @@ namespace UserReviewsWebsiteAPI.Services
             return product;
         }
 
-        public void AddProduct(Product createProduct)
+        public void AddProduct(ProductDto createProduct)
         {
-            var category = _db.Categories.FirstOrDefault(r => r.CategoryId == createProduct.Category.CategoryId);
-
             Product product = new Product
             {
 
@@ -50,7 +48,6 @@ namespace UserReviewsWebsiteAPI.Services
                 Description = createProduct.Description,
                 ImagePath = createProduct.ImagePath,
                 AverageScore = createProduct.AverageScore,
-                Category = category
             };
 
             _db.Products.Add(product);
