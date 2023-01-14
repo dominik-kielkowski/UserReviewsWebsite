@@ -15,15 +15,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token');
-    console.log(this.token)
 
     this.userService.GetUserProfile().subscribe(
       res => {
-        console.log(res)
         this.userDetails = res
-      },
-      err => {
-        console.log(err);
       }
     )
   }

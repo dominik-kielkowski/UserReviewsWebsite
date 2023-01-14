@@ -27,7 +27,7 @@ export class ProductApiService {
     return this.http.put(this.productAPIUrl + `/Product/${id}`, data);
   }
 
-  DeleteProduct(id: number | string) {
+  DeleteProduct(id: number) {
     return this.http.delete(this.productAPIUrl + `/Product/${id}`);
   }
 

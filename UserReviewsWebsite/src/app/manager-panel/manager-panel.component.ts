@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagerPanelComponent implements OnInit {
 
+  inEditMode = false
+  
   constructor() { }
 
   ngOnInit(): void {

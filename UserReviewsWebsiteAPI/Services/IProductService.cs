@@ -1,4 +1,5 @@
 ﻿using UserReviewsWebsiteAPI.Database.Models;
+using UserReviewsWebsiteAPI.Database.Models.Dtos;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -8,6 +9,6 @@ namespace UserReviewsWebsiteAPI.Services
         void DeleteProduct(int id);
         Product GetProduct(int id);
         IEnumerable<Product> GetProducts();
-        void UpdateProduct(int id, Product updateProduct);
+        void UpdateProduct(int id, ProductDto updateProduct);
     }
 }

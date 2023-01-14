@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { ProductApiService } from 'src/app/product-api.service';
 
 @Component({
   selector: 'app-management-details',
@@ -7,9 +9,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagementDetailsComponent implements OnInit {
 
-  constructor() { }
+  product: any;
+  id!: number;
+  inEditMode = false;
+  productName: string = "";
+  imagePath: string = "";
+  productDescription: string = "";
+    
+
+  constructor(private route: ActivatedRoute,private productService: ProductApiService) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      this.productService.GetProduct(this.id).subscribe((product) => { this.product = product });
+      console.log(this.product)
+    });
+  };
+
+  onSwitchToEdit() {
+    this.imagePath = this.product.imagePath
+    this.productName = this.product.name
+    this.productDescription = this.product.description
+    this.inEditMode = !this.inEditMode
   }
 
-}
+  onSaveChanges() {
+    var product = {
+      Name: this.productName,
+      ImagePath: this.imagePath,
+      Description: this.productDescription,
+      CategoryId: 3,
+      AverageScore: 10
+    }
+
+    console.log(product)
+    this.productService.UpdateProduct(this.id, product).subscribe()
+
+    this.inEditMode = !this.inEditMode
+  }
+
+  onDeleteProduct() {
+      console.log(this.id)
+      this.productService.DeleteProduct(this.id).subscribe()
+  }
+  }

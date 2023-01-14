@@ -12,7 +12,6 @@ export class ManagementListComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = this.productService.GetProducts()
-    console.log(this.products)
   }
 
 }

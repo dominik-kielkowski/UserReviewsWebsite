@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using UserReviewsWebsiteAPI.Database.Models;
+using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using UserReviewsWebsiteAPI.Services;
 
 namespace UserReviewsWebsiteAPI.Controllers
@@ -38,14 +38,14 @@ namespace UserReviewsWebsiteAPI.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public ActionResult UpdateProduct(int id, Product product)
+        [HttpPut("{id}")]
+        public ActionResult UpdateProduct(int id, ProductDto product)
         {
             _service.UpdateProduct(id, product);
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public ActionResult DeleteProduct(int id)
         {
             _service.DeleteProduct(id);

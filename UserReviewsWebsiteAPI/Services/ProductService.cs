@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UserReviewsWebsiteAPI.Database.Data;
 using UserReviewsWebsiteAPI.Database.Models;
+using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using UserReviewsWebsiteAPI.Exceptions;
 
 namespace UserReviewsWebsiteAPI.Services
@@ -57,7 +58,7 @@ namespace UserReviewsWebsiteAPI.Services
 
         }
 
-        public void UpdateProduct(int id, Product updateProduct)
+        public void UpdateProduct(int id, ProductDto updateProduct)
         {
             Product product = _db.Products.FirstOrDefault(r => r.Id == id);
 
