@@ -7,6 +7,7 @@ using System.Text;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Exceptions;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
+using Microsoft.EntityFrameworkCore;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -38,7 +39,7 @@ namespace UserReviewsWebsiteAPI.Services
         public User GetUser(string id)
         {
             int userId = Convert.ToInt32(id);
-            User user = _db.Users.FirstOrDefault(x => x.Id == userId);
+            User user = _db.Users.Include(x => x.Role).FirstOrDefault(x => x.Id == userId);
 
             if (user == null)
             {

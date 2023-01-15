@@ -18,11 +18,9 @@ export class ReviewPostComponent implements OnInit {
   ngOnInit(): void {
     this.userService.GetUserProfile().subscribe(
       res => {
-        console.log(res)
         this.userDetails = res
       },
       err => {
-        console.log(err);
       }
     )
   }
@@ -37,6 +35,5 @@ export class ReviewPostComponent implements OnInit {
     }
 
     this.reviewService.AddReview(review).subscribe()
-    console.log(review);
   }
 }

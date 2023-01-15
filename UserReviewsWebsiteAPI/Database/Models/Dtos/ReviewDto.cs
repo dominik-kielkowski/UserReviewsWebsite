@@ -1,6 +1,6 @@
 ﻿namespace UserReviewsWebsiteAPI.Database.Models.Dtos
 {
-    public class CreateReviewDto
+    public class ReviewDto
     {
         public string Title { get; set; }
         public string ReviewBody { get; set; }

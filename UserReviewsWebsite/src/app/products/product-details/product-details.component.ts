@@ -13,6 +13,7 @@ import { UserApiService } from 'src/app/user-api.service';
 export class ProductDetailsComponent implements OnInit {
   id!: number;
   product: any;
+  showAddReview = false;
 
   constructor(private service: ProductApiService, private route: ActivatedRoute) { }
 
@@ -22,5 +23,9 @@ export class ProductDetailsComponent implements OnInit {
       this.service.GetProduct(this.id).subscribe((product) => { this.product = product });
     })
   };
+
+  onShowAddReview() {
+    this.showAddReview = !this.showAddReview
+  }
 
 };

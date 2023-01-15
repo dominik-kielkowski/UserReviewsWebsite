@@ -1,3 +1,11 @@
-<div style="margin-top: 10px;">
-    <app-review-item *ngFor="let review of reviewList$|async" [item]="review"></app-review-item>
+<div>
+    <div class="container my-1 py-1 text-dark">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-6">
+                <div class="card">
+                    <app-review-item *ngFor="let review of reviewList$|async" [item]="review"></app-review-item>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

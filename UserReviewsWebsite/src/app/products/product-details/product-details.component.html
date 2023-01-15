@@ -1,13 +1,13 @@
 <div>
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 25%; margin:auto">
         <img class=" card-img-top" src="{{product.imagePath}}" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">{{product.name}}</h5>
             <p class="card-text">{{product.description}}</p>
-            <a routerLink="" class="btn btn-primary">Add review</a>
+            <a  class="btn btn-primary" (click)="onShowAddReview()">Add review</a>
         </div>
     </div>
-    <div>
+    <div *ngIf="showAddReview">
         <app-review-post [id]="id"></app-review-post>
     </div>
     <div>

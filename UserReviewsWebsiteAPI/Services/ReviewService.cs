@@ -45,7 +45,7 @@ namespace UserReviewsWebsiteAPI.Services
             return reviews;
         }
 
-        public void AddReview(CreateReviewDto createReview)
+        public void AddReview(ReviewDto createReview)
         {
             Product product = _db.Products.FirstOrDefault(p => p.Id == createReview.ProductId);
 
@@ -64,7 +64,7 @@ namespace UserReviewsWebsiteAPI.Services
             _db.SaveChanges();
         }
 
-        public void UpdateReview(int id, CreateReviewDto updateReview)
+        public void UpdateReview(int id, ReviewDto updateReview)
         {
             Review review = _db.Reviews.FirstOrDefault(p => p.Id == id);
 

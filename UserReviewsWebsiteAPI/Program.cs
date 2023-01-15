@@ -13,6 +13,7 @@ using FluentValidation;
 using UserReviewsWebsiteAPI.Database.Models.Validators;
 using FluentValidation.AspNetCore;
 using System.Text.Json.Serialization;
+using UserReviewsWebsiteAPI.Database.Models.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,7 +74,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-builder.Services.AddScoped<IValidator<User>, UserValidator>();
+builder.Services.AddScoped<IValidator<RegisterDto>, UserValidator>();
+builder.Services.AddScoped<IValidator<ReviewDto>, ReviewValidator>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 

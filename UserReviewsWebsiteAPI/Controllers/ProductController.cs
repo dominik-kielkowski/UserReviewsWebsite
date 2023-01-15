@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using UserReviewsWebsiteAPI.Services;
@@ -32,6 +33,7 @@ namespace UserReviewsWebsiteAPI.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult AddProduct(ProductDto product)
         {
             _service.AddProduct(product);
@@ -39,6 +41,7 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public ActionResult UpdateProduct(int id, ProductDto product)
         {
             _service.UpdateProduct(id, product);
@@ -46,6 +49,7 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteProduct(int id)
         {
             _service.DeleteProduct(id);
