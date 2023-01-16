@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -20,15 +20,18 @@ export class ProductApiService {
   }
 
   AddProduct(data: any): Observable<any> {
-    return this.http.post(this.productAPIUrl + '/Product', data);
+    var tokenHeader = new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.post(this.productAPIUrl + '/Product', data, { headers: tokenHeader });
   }
 
   UpdateProduct(id: number | string, data: any) {
-    return this.http.put(this.productAPIUrl + `/Product/${id}`, data);
+    var tokenHeader = new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.put(this.productAPIUrl + `/Product/${id}`, data, { headers: tokenHeader });
   }
 
   DeleteProduct(id: number) {
-    return this.http.delete(this.productAPIUrl + `/Product/${id}`);
+    var tokenHeader = new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.delete(this.productAPIUrl + `/Product/${id}`, { headers: tokenHeader });
   }
 
 }

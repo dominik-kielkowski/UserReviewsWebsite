@@ -51,7 +51,7 @@ namespace UserReviewsWebsiteAPI.Services
 
         public string GenerateJwt(LoginDto loginUser)
         {
-            var user = _db.Users.FirstOrDefault(u => u.Email == loginUser.Email);
+            var user = _db.Users.Include(x => x.Role).FirstOrDefault(u => u.Email == loginUser.Email);
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginUser.PasswordHash);
             if(result == PasswordVerificationResult.Failed)
@@ -62,7 +62,8 @@ namespace UserReviewsWebsiteAPI.Services
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username.ToString())
+                new Claim(ClaimTypes.Name, user.Username.ToString()),
+                new Claim(ClaimTypes.Role, user.Role.Name.ToString())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
@@ -81,7 +82,7 @@ namespace UserReviewsWebsiteAPI.Services
 
         public void RegisterUser(RegisterDto createUser)
         {
-            Role role = _db.Role.FirstOrDefault(r => r.Id == 1);
+            Role role = _db.Role.FirstOrDefault(r => r.Id == createUser.RoleId);
 
 
             User user = new User
