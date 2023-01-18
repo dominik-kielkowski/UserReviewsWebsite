@@ -12,6 +12,7 @@ export class RegisterUserComponent implements OnInit {
   email = "";
   passwordHash = "";
   roleId = 1;
+  error: any;
 
   constructor(private userService: UserApiService) { }
 
@@ -28,8 +29,13 @@ export class RegisterUserComponent implements OnInit {
     }
     
 
-    this.userService.RegisterUser(user).subscribe()
-    console.log(user)
-  }
-
+    this.userService.RegisterUser(user).subscribe(
+      res => {
+        console.log(user)
+    },
+    error => {
+      console.log(error)
+      this.error = error.error
+    }) 
+   }
 }

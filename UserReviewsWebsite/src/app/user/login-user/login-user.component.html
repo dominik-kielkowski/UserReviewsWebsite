@@ -17,5 +17,8 @@
                 <button class="btn btn-primary" type="submit">Log In</button>
             </div>
         </form>
+        <div class="alert alert-danger" *ngIf="error">
+            <p>{{error}}</p>
+    </div>
     </div>
 </div>

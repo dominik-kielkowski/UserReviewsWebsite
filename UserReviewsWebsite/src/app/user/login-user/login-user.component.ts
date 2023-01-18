@@ -10,6 +10,7 @@ import { UserApiService } from 'src/app/user-api.service';
 })
 export class LoginUserComponent implements OnInit {
   inLoginMode = true;
+  error: any;
 
   constructor(private service: UserApiService, private routter: Router) { }
 
@@ -18,10 +19,15 @@ export class LoginUserComponent implements OnInit {
       (response: any) => {
         localStorage.setItem('token', response.token);
         window.location.reload();
+      },
+      error => {
+        this.error = error.error
+        console.log(error)
       }
     );
+
+    
     form.reset();
-    this.routter.navigateByUrl('/home');
   }
 
 

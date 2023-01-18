@@ -15,5 +15,8 @@
             <div>
                 <button class="btn btn-primary" type="submit" (click)="onSubmit()">Sign In</button>
             </div>
+            <div class="alert alert-danger" *ngIf="error">
+                    <p>{{error}}</p>
+            </div>
     </div>
 </div>
