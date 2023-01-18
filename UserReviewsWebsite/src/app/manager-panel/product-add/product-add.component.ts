@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductApiService } from 'src/app/product-api.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ProductAddComponent implements OnInit {
   productName = "";
   productDescription="";
 
-  constructor(private productService: ProductApiService) { }
+  constructor(private productService: ProductApiService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +26,6 @@ export class ProductAddComponent implements OnInit {
     }
 
     this.productService.AddProduct(product).subscribe()
-    console.log(product)
+    this.router.navigate(['manage'])
   }
 }

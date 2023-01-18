@@ -23,6 +23,8 @@ export class ReviewItemComponent implements OnInit {
 
   onDeleteReview() {
     this.reviewService.DeleteReview(this.item.id).subscribe()
+
+    window.location.reload();
   }
 
   onEditReview() {
@@ -45,5 +47,7 @@ export class ReviewItemComponent implements OnInit {
     this.reviewService.EditReview(review.ProductId, review).subscribe()
 
     this.inEditMode = !this.inEditMode
+
+    window.location.reload();
   }
 }

@@ -14,26 +14,28 @@ export class ReviewPostComponent implements OnInit {
 
   @Input() id: any;
   userDetails: any;
+  title = "";
+  reviewBody = "";
+  score = "";
 
   ngOnInit(): void {
     this.userService.GetUserProfile().subscribe(
       res => {
         this.userDetails = res
-      },
-      err => {
       }
     )
   }
 
-  addReview(form: NgForm) {
+  addReview() {
     var review = {
-      Title: form.value.title,
-      ReviewBody: form.value.reviewBody,
-      Score: form.value.score,
+      Title: this.title,
+      ReviewBody: this.reviewBody,
+      Score: this.score,
       ProductId: this.id,
       UserId: this.userDetails.id
     }
 
     this.reviewService.AddReview(review).subscribe()
+    window.location.reload();
   }
 }

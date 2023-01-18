@@ -27,13 +27,13 @@ namespace UserReviewsWebsiteAPI.Controllers
             return Ok(reviews);
         }
 
-        //[HttpGet("{id}")]
-        //public ActionResult GetReview(int id)
-        //{
-        //    IEnumerable<Review> review = _service.GetReview(id);
+        [HttpGet("{id}")]
+        public ActionResult GetReview(int id)
+        {
+            IEnumerable<Review> review = _service.GetReview(id);
 
-        //    return Ok(review);
-        //}
+            return Ok(review);
+        }
 
         [HttpPost]
         public ActionResult AddReview(ReviewDto createReview)

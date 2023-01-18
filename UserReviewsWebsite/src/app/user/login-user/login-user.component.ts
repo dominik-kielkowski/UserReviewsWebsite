@@ -17,10 +17,11 @@ export class LoginUserComponent implements OnInit {
     this.service.LoginUser(form.value).subscribe(
       (response: any) => {
         localStorage.setItem('token', response.token);
-        this.routter.navigateByUrl('/home');
+        window.location.reload();
       }
     );
     form.reset();
+    this.routter.navigateByUrl('/home');
   }
 
 

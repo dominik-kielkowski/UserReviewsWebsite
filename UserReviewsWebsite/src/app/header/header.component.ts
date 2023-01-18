@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { UserApiService } from '../user-api.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { UserApiService } from '../user-api.service';
 export class HeaderComponent implements OnInit {
   token: any;
   userDetails: any;
+
+  refresh = new BehaviorSubject<boolean>(true);
 
 
   constructor(private userService: UserApiService) { }
@@ -26,6 +29,7 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     localStorage.removeItem('token');
+    window.location.reload();
   }
 
 }

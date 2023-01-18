@@ -6,13 +6,12 @@
                     <div class="card-body p-4">
                         <div class="d-flex flex-start w-100">
                             <div class="w-100">
-                                <form (ngSubmit)="addReview(f)" #f="ngForm">
                                     <h5>Title</h5>
                                     <div class="form-outline">
-                                        <input class="form-control" id="title" ngModel name="title" />
+                                        <input class="form-control" id="title" [(ngModel)]="title" name="title" />
                                     </div>
                                     <h6>Score</h6>
-                                    <select id="score" ngModel name="score">
+                                    <select id="score" [(ngModel)]="score" name="score">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -26,15 +25,14 @@
                                     </select>
                                     <h5>Add a comment</h5>
                                     <div class="form-outline">
-                                        <input class="form-control" id="reviewBody" ngModel name="reviewBody" />
+                                        <input class="form-control" id="reviewBody" [(ngModel)]="reviewBody" name="reviewBody" />
                                         <label class="form-label" for="textAreaExample">What is your view?</label>
                                     </div>
                                     <div class="d-flex justify-content-between mt-3">
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary" (click)="addReview()">
                                             Post Review <i class="fas fa-long-arrow-alt-right ms-1"></i>
                                         </button>
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>

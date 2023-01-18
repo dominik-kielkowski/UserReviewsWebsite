@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProductApiService } from 'src/app/product-api.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class ManagementDetailsComponent implements OnInit {
   productDescription: string = "";
     
 
-  constructor(private route: ActivatedRoute,private productService: ProductApiService) { }
+  constructor(private route: ActivatedRoute,private productService: ProductApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -44,9 +44,17 @@ export class ManagementDetailsComponent implements OnInit {
     this.productService.UpdateProduct(this.id, product).subscribe()
 
     this.inEditMode = !this.inEditMode
+
+    window.location.reload();
   }
 
   onDeleteProduct() {
-      this.productService.DeleteProduct(this.id).subscribe()
-  }
+      this.productService.DeleteProduct(this.id).subscribe(
+        (response: any) => {
+          window.location.reload();
+        }
+      )
+
+      this.router.navigate(['manage'])
+    }
   }
