@@ -17,6 +17,11 @@
                 <input type="text" name="productDescription" [(ngModel)]="productDescription">
             </div>
         </div>
+        
     </div>
     <button type="button" class="btn btn-danger" routerLink="/manage">Cancel</button>
     <button type="button" class="btn btn-success" (click)="onSaveChanges()">Save</button>
+    <div class="alert alert-danger" *ngIf="error">
+        <p>{{error}}</p>
+</div>
+    

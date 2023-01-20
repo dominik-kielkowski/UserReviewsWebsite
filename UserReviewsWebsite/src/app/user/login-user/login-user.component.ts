@@ -12,22 +12,19 @@ export class LoginUserComponent implements OnInit {
   inLoginMode = true;
   error: any;
 
-  constructor(private service: UserApiService, private routter: Router) { }
+  constructor(private service: UserApiService, private router: Router) { }
 
   onSubmit(form: NgForm) {
     this.service.LoginUser(form.value).subscribe(
       (response: any) => {
         localStorage.setItem('token', response.token);
+        form.reset();
         window.location.reload();
       },
       error => {
         this.error = error.error
-        console.log(error)
       }
     );
-
-    
-    form.reset();
   }
 
 

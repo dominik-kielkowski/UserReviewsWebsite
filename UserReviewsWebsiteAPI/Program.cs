@@ -67,6 +67,7 @@ builder.Services.AddAuthentication(option =>
 });
 
 builder.Services.AddControllers().AddFluentValidation();
+builder.Services.AddScoped<RoleSeeder>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
@@ -81,7 +82,14 @@ builder.Services.AddScoped<IValidator<ProductDto>, ProductValidator>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
+
+
 var app = builder.Build();
+
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<RoleSeeder>();
+
+seeder.Seed();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

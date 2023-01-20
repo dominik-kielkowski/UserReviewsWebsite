@@ -27,15 +27,15 @@ export class RegisterUserComponent implements OnInit {
       PasswordHash: this.passwordHash,
       RoleId: this.roleId,
     }
-    
+
 
     this.userService.RegisterUser(user).subscribe(
       res => {
         console.log(user)
-    },
-    error => {
-      console.log(error)
-      this.error = error.error
-    }) 
-   }
+      },
+      error => {
+        console.log(error)
+        this.error = error.error.title
+      })
+  }
 }

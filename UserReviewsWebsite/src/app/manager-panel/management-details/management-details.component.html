@@ -16,7 +16,10 @@
     </div>
     <hr>
     <button type="button" class="btn btn-primary" (click)="onSwitchToEdit()">Edit</button>
-    <button type="button" class="btn btn-danger"  (click)="onDeleteProduct()">Delete</button>
+    <button type="button" class="btn btn-danger" (click)="onDeleteProduct()">Delete</button>
+    <div class="alert alert-danger" *ngIf="error">
+        <p>{{error}}</p>
+    </div>
 </div>
 <div *ngIf="inEditMode">
     <div class="row">
@@ -40,6 +43,7 @@
     <hr>
     <button type="button" class="btn btn-danger" (click)="onSwitchToEdit()">Cancel</button>
     <button type="button" class="btn btn-success" (click)="onSaveChanges()">Save</button>
-
+    <div class="alert alert-danger" *ngIf="error">
+        <p>{{error}}</p>
+    </div>
 </div>
-

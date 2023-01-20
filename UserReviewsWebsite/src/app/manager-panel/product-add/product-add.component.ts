@@ -10,7 +10,8 @@ import { ProductApiService } from 'src/app/product-api.service';
 export class ProductAddComponent implements OnInit {
   imagePath = "";
   productName = "";
-  productDescription="";
+  productDescription = "";
+  error: any;
 
   constructor(private productService: ProductApiService, private router: Router) { }
 
@@ -25,7 +26,13 @@ export class ProductAddComponent implements OnInit {
       AverageScore: 10
     }
 
-    this.productService.AddProduct(product).subscribe()
-    this.router.navigate(['manage'])
+    this.productService.AddProduct(product).subscribe(
+      res => {
+        this.router.navigate(['manage'])
+      },
+      error => {
+        console.log(error)
+        this.error = error.error.title
+      })
   }
 }

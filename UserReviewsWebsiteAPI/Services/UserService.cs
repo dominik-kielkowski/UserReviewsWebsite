@@ -51,7 +51,12 @@ namespace UserReviewsWebsiteAPI.Services
 
         public string GenerateJwt(LoginDto loginUser)
         {
-            var user = _db.Users.Include(x => x.Role).FirstOrDefault(u => u.Email == loginUser.Email);
+            var user = _db.Users.Include(x => x.Role).FirstOrDefault(u => u.Email == loginUser.Email && u.Username == loginUser.Username);
+
+            if(user == null)
+            {
+                throw (new WrongPasswordException("Incorrect login details"));
+            }
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginUser.PasswordHash);
             if(result == PasswordVerificationResult.Failed)
@@ -91,6 +96,10 @@ namespace UserReviewsWebsiteAPI.Services
                 Email = createUser.Email,
                 Role = role
             };
+
+            if (user == null){
+                throw (new WrongPasswordException("Incorrect password"));
+            }
 
             var hashedPassword = _passwordHasher.HashPassword(user, createUser.PasswordHash);
 

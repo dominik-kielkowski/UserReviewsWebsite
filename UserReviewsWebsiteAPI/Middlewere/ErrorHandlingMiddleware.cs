@@ -20,6 +20,11 @@ namespace UserReviewsWebsiteAPI.Middlewere
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync(notFoundException.Message);
             }
+            catch (IncorrectlogindetailsException incorrectlogindetailsException)
+            {
+                context.Response.StatusCode = 401;
+                await context.Response.WriteAsync(incorrectlogindetailsException.Message);
+            }
             catch (Exception ex)
             {
                 context.Response.StatusCode = 500;
