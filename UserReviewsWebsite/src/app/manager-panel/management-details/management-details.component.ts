@@ -62,8 +62,8 @@ export class ManagementDetailsComponent implements OnInit {
         this.router.navigate(['manage'])
       },
       error => {
-        console.log(error.error)
-        this.error = error.status
+        console.log(error)
+        this.error = error.message
       })
 
   }

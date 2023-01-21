@@ -6,7 +6,7 @@ namespace UserReviewsWebsiteAPI
     public class RoleSeeder
     {
         private readonly ApplicationDbContext _db;
-        RoleSeeder(ApplicationDbContext db)
+        public RoleSeeder(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -24,20 +24,20 @@ namespace UserReviewsWebsiteAPI
             }
         }
 
-        private IEnumerable<Role> GetRoles()
+        public IEnumerable<Role> GetRoles()
         {
-            var roles = new List<Role>();
+            var roles = new List<Role>()
             {
                 new Role()
                 {
                     Name = "User"
-                };
+                },
 
                 new Role()
                 {
                     Name = "Admin"
-                };
-            }
+                }
+            };
             return roles;
         }
     }
