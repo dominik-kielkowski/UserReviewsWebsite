@@ -18,9 +18,9 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetProducts()
+        public ActionResult GetProducts([FromQuery]ProductQuery query)
         {
-            IEnumerable<Product> product = _service.GetProducts();
+            PageResult<Product> product = _service.GetProducts(query);
             return Ok(product);
         }
 

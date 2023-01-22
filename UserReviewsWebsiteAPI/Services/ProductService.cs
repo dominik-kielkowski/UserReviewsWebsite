@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using UserReviewsWebsiteAPI.Database.Data;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
@@ -15,16 +16,38 @@ namespace UserReviewsWebsiteAPI.Services
             _db = db;
         }
 
-        public IEnumerable<Product> GetProducts()
+        public PageResult<Product> GetProducts(ProductQuery query)
         {
-            List<Product> products = _db.Products.Include(r => r.Reviews).ToList();
+            var baseQuery = _db.Products.Include(p => p.Reviews).Where(p => query.SearchPhrase == null ||
+            (p.Name.ToLower().Contains(query.SearchPhrase.ToLower())));
+
+            if (!string.IsNullOrEmpty(query.SortBy))
+            {
+                var colummsSelector = new Dictionary<string, Expression<Func<Product, object>>>
+                {
+                    {nameof(Product.Name), r => r.Name },
+                    {"Score", r => r.Reviews.Average(r => r.Score) }
+                };
+
+                var selectedColumn = colummsSelector[query.SortBy];
+
+                baseQuery = query.SortDirection == SortDirection.Ascending
+                    ? baseQuery.OrderBy(r => r.Name)
+                    : baseQuery.OrderByDescending(r => r.Name);
+            }
+
+            var products = baseQuery.Skip(query.PageSize * (query.PageNumber -1)).Take(query.PageSize).ToList();
 
             if(products == null)
             {
                 throw new NotFoundException("Products not found");
             }
 
-            return products;
+            var totalItemsCount = baseQuery.Count();
+
+            var result = new PageResult<Product>(products, totalItemsCount, query.PageSize, query.PageNumber);
+
+            return result;
         }
 
         public Product GetProduct(int id)

@@ -8,13 +8,14 @@ import { ProductApiService } from 'src/app/product-api.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  productsList$!: Observable<any[]>
+  productsList: any;
 
-  inspectionTypeMap: Map<number, string> = new Map()
 
   constructor(private service: ProductApiService) { }
 
   ngOnInit(): void {
-    this.productsList$ = this.service.GetProducts();
+
+    this.service.GetProducts().subscribe((products) => { this.productsList = products });
+    console.log(this.productsList)
   }
 }

@@ -8,7 +8,7 @@ namespace UserReviewsWebsiteAPI.Services
         void AddProduct(ProductDto createProduct);
         void DeleteProduct(int id);
         Product GetProduct(int id);
-        IEnumerable<Product> GetProducts();
+        PageResult<Product> GetProducts(ProductQuery query);
         void UpdateProduct(int id, ProductDto updateProduct);
     }
 }

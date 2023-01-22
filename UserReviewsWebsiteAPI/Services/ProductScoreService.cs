@@ -13,9 +13,14 @@ namespace UserReviewsWebsiteAPI.Services
 
         public double GetAveregeScore(int productId)
         {
+            if (_db.Reviews.Where(x => x.ProductId == productId).Any())
+            {
                 var averege = _db.Reviews.Where(x => x.ProductId == productId).Average(x => x.Score);
                 averege = Math.Round(averege, 1);
                 return averege;
+            }
+
+            return 0;
         }
 
 

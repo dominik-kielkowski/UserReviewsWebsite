@@ -11,6 +11,7 @@ export class ManagementListComponent implements OnInit {
   constructor(private productService: ProductApiService) { }
 
   ngOnInit(): void {
+    
     this.products = this.productService.GetProducts()
   }
 

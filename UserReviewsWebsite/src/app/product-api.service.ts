@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,8 @@ export class ProductApiService {
   constructor(private http: HttpClient) { }
 
   GetProducts(): Observable<any[]> {
-    return this.http.get<any>(this.productAPIUrl + '/Product');
+    const params = new HttpParams().set('SearchPhrase', 'o').set('PageNumber', '1').set('PageSize', '5');
+    return this.http.get<any>(this.productAPIUrl + '/Product', { params: params });
   }
 
   GetProduct(id: number): Observable<any> {

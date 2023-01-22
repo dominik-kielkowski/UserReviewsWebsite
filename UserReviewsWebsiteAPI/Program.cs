@@ -79,6 +79,7 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<RegisterDto>, UserValidator>();
 builder.Services.AddScoped<IValidator<ReviewDto>, ReviewValidator>();
 builder.Services.AddScoped<IValidator<ProductDto>, ProductValidator>();
+builder.Services.AddScoped<IValidator<ProductQuery>, ProductQueryValidator>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
