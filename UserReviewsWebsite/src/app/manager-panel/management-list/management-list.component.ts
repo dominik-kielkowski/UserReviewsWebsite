@@ -7,12 +7,24 @@ import { ProductApiService } from 'src/app/product-api.service';
   styleUrls: ['./management-list.component.css']
 })
 export class ManagementListComponent implements OnInit {
-  products: any;
+  productsList: any;
+  pageSize = 2;
+  SearchPhrase = "";
   constructor(private productService: ProductApiService) { }
 
   ngOnInit(): void {
-    
-    this.products = this.productService.GetProducts()
+
+    this.getProducts()
+    console.log(this.productsList)
+  }
+
+  getProducts() {
+    this.productService.GetProducts(this.SearchPhrase, this.pageSize).subscribe({
+      next: (response: any) => {
+        this.productsList = response.items;
+      },
+      error: err => console.log(err)
+    });
   }
 
 }

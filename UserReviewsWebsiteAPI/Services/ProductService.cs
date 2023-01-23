@@ -32,8 +32,8 @@ namespace UserReviewsWebsiteAPI.Services
                 var selectedColumn = colummsSelector[query.SortBy];
 
                 baseQuery = query.SortDirection == SortDirection.Ascending
-                    ? baseQuery.OrderBy(r => r.Name)
-                    : baseQuery.OrderByDescending(r => r.Name);
+                    ? baseQuery.OrderBy(selectedColumn)
+                    : baseQuery.OrderByDescending(selectedColumn);
             }
 
             var products = baseQuery.Skip(query.PageSize * (query.PageNumber -1)).Take(query.PageSize).ToList();
@@ -69,8 +69,7 @@ namespace UserReviewsWebsiteAPI.Services
 
                 Name = createProduct.Name,
                 Description = createProduct.Description,
-                ImagePath = createProduct.ImagePath,
-                AverageScore = createProduct.AverageScore,
+                ImagePath = createProduct.ImagePath
             };
 
             _db.Products.Add(product);
@@ -89,7 +88,6 @@ namespace UserReviewsWebsiteAPI.Services
 
             product.Name = updateProduct.Name;
             product.Description = updateProduct.Description;
-            product.AverageScore = updateProduct.AverageScore;
             product.ImagePath = updateProduct.ImagePath;
 
             _db.SaveChanges();

@@ -1,3 +1,4 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductApiService } from 'src/app/product-api.service';
@@ -9,13 +10,34 @@ import { ProductApiService } from 'src/app/product-api.service';
 })
 export class ProductListComponent implements OnInit {
   productsList: any;
+  pageSize = 2;
+  SearchPhrase = "";
+
+  totalPages: any;
+  itemsFrom: any;
+  itemsTo: any;
+  totalItemsCount: any;
 
 
-  constructor(private service: ProductApiService) { }
+  constructor(private service: ProductApiService, private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.getProducts()
+  }
 
-    this.service.GetProducts().subscribe((products) => { this.productsList = products });
-    console.log(this.productsList)
+  getProducts() {
+    this.service.GetProducts(this.SearchPhrase, this.pageSize).subscribe({
+      next: (response: any) => {
+        this.productsList = response.items;
+        this.totalPages = response.totalPages
+        this.itemsFrom = response.itemsFrom
+        this.itemsTo = response.itemsTo
+        this.totalItemsCount = response.totalItemsCount
+        console.log(response)
+
+      },
+      error: err => console.log(err)
+    });
   }
 }
+

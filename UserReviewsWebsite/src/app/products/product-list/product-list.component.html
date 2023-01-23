@@ -1,3 +1,14 @@
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div>
+            <input [(ngModel)]="SearchPhrase" class="form-control mr-sm-2" type="search" placeholder="Search"
+                (input)="getProducts()">
+        </div>
+        <div>
+            <p class="text-warning">Showing records {{itemsFrom}}-{{itemsTo}} out of {{totalItemsCount}}</p>
+        </div>
+    </div>
+</nav>
 <div class="container-fluid">
-    <app-product-item *ngFor="let product of productsList|async" [item]="product"></app-product-item>
+    <app-product-item *ngFor="let product of productsList" [item]="product"></app-product-item>
 </div>
