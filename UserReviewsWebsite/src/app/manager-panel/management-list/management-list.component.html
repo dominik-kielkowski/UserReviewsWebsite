@@ -4,6 +4,31 @@
     </div>
 </div>
 <hr>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div>
+            <input [(ngModel)]="SearchPhrase" class="form-control mr-sm-2" type="search" placeholder="Search"
+                (input)="getProducts()">
+        </div>
+        <div>
+            <label class="text-warning">Sort By: </label>
+            <button class="btn btn-warning" (click)="onSwitchSortBy()">{{SortBy}}</button>
+            <button class="btn btn-warning" (click)="onSwitchSortDirection()">{{SortDirection}}</button>
+        </div>
+        <div>
+            <label class="text-warning">Page: {{PageNumber}}</label>
+            <button class="btn btn-warning" [disabled]="PageNumber == 1" (click)="onPreviousPage()">Previous</button>
+            <button class="btn btn-warning" [disabled]="PageNumber == totalPages" (click)="onNextPage()">Next</button>
+        </div>
+        <div>
+            <label class="text-warning">Records per page: </label>
+            <button class="btn btn-warning" (click)="onChangePageSize()">{{pageSize}}</button>
+        </div>
+        <div>
+            <p class="text-warning">Showing records {{itemsFrom}}-{{itemsTo}} out of {{totalItemsCount}}</p>
+        </div>
+    </div>
+</nav>
 <div class="row">
     <div class="col-xs-12">
         <app-management-item *ngFor="let product of productsList" [product]="product"></app-management-item>

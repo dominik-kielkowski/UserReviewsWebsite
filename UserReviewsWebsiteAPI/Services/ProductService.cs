@@ -47,6 +47,16 @@ namespace UserReviewsWebsiteAPI.Services
 
             var result = new PageResult<Product>(products, totalItemsCount, query.PageSize, query.PageNumber);
 
+            if(result.ItemsTo > result.TotalItemsCount)
+            {
+                result.ItemsTo = result.TotalItemsCount;
+            }
+
+            if (result.ItemsFrom > result.TotalItemsCount)
+            {
+                result.ItemsFrom = result.TotalItemsCount;
+            }
+
             return result;
         }
 

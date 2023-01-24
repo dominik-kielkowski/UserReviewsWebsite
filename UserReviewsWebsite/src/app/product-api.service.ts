@@ -11,9 +11,11 @@ export class ProductApiService {
 
   constructor(private http: HttpClient) { }
 
-  GetProducts(SerchPhrase: string, PageSize: number): Observable<any[]> {
-    const params = new HttpParams().set('SearchPhrase', SerchPhrase).set('PageNumber', '1').set('PageSize', PageSize).set('SortBy', 'Score')
-      .set('SortDirection', 'descending');
+  GetProducts(query: any): Observable<any[]> {
+
+    const params = new HttpParams().set('SearchPhrase', query.SerchPhrase).set('PageNumber', query.PageNumber).set('PageSize', query.PageSize)
+      .set('SortBy', query.SortBy).set('SortDirection', query.SortDirection);
+
     return this.http.get<any>(this.productAPIUrl + '/Product', { params: params });
   }
 

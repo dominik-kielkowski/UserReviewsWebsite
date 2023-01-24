@@ -10,8 +10,12 @@ import { ProductApiService } from 'src/app/product-api.service';
 })
 export class ProductListComponent implements OnInit {
   productsList: any;
-  pageSize = 2;
+
+  PageNumber = 1;
+  pageSize = 1;
   SearchPhrase = "";
+  SortBy = "Name"
+  SortDirection = "Descending"
 
   totalPages: any;
   itemsFrom: any;
@@ -26,7 +30,15 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts() {
-    this.service.GetProducts(this.SearchPhrase, this.pageSize).subscribe({
+    var query = {
+      SerchPhrase: this.SearchPhrase,
+      PageNumber: this.PageNumber,
+      PageSize: this.pageSize,
+      SortBy: this.SortBy,
+      SortDirection: this.SortDirection
+    }
+
+    this.service.GetProducts(query).subscribe({
       next: (response: any) => {
         this.productsList = response.items;
         this.totalPages = response.totalPages
@@ -38,6 +50,57 @@ export class ProductListComponent implements OnInit {
       },
       error: err => console.log(err)
     });
+  }
+
+  onSwitchSortBy() {
+    if (this.SortBy == "Name") {
+      this.SortBy = "Score"
+    }
+    else {
+      this.SortBy = "Name"
+    }
+
+    this.getProducts()
+  }
+
+  onSwitchSortDirection() {
+    if (this.SortDirection == "Descending") {
+      this.SortDirection = "Ascending"
+    }
+    else {
+      this.SortDirection = "Descending"
+    }
+
+    console.log(this.SortDirection)
+    this.getProducts()
+  }
+
+  onNextPage() {
+    this.PageNumber += 1
+    this.getProducts()
+  }
+
+  onPreviousPage() {
+    this.PageNumber -= 1
+    this.getProducts()
+  }
+
+  onChangePageSize() {
+    if (this.pageSize == 1) {
+      this.pageSize = 3
+      this.PageNumber = 1;
+      this.getProducts()
+    }
+    else if (this.pageSize == 3) {
+      this.pageSize = 5
+      this.PageNumber = 1;
+      this.getProducts()
+    }
+    else {
+      this.pageSize = 1
+      this.PageNumber = 1;
+      this.getProducts()
+    }
   }
 }
 
