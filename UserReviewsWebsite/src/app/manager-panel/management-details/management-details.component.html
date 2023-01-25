@@ -21,29 +21,42 @@
         <p>{{error}}</p>
     </div>
 </div>
-<div *ngIf="inEditMode">
-    <div class="row">
-        <div class="col-xs-12">
-            <label for="imagePath">Image Path:</label>
-            <input type="text" name="imagePath" [(ngModel)]="imagePath">
+
+<div class="container my-1 py-1 text-dark " *ngIf="inEditMode">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-6">
+            <div class="card">
+                <div class="card-body p-4">
+                    <div class="d-flex flex-start w-100">
+                        <div class="w-100">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label for="imagePath">Image Path:</label>
+                                    <input type="text" name="imagePath" [(ngModel)]="imagePath">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label for="productName">Title:</label>
+                                    <input type="text" name="productName" [(ngModel)]="productName">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label for="productDescription">Description:</label>
+                                    <input type="text" name="productDescription" [(ngModel)]="productDescription">
+                                </div>
+                            </div>
+                            <hr>
+                            <button type="button" class="btn btn-danger" (click)="onSwitchToEdit()">Cancel</button>
+                            <button type="button" class="btn btn-success" (click)="onSaveChanges()">Save</button>
+                            <div class="alert alert-danger" *ngIf="error">
+                                <p>{{error}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <label for="productName">Title:</label>
-            <input type="text" name="productName" [(ngModel)]="productName">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <label for="productDescription">Description:</label>
-            <input type="text" name="productDescription" [(ngModel)]="productDescription">
-        </div>
-    </div>
-    <hr>
-    <button type="button" class="btn btn-danger" (click)="onSwitchToEdit()">Cancel</button>
-    <button type="button" class="btn btn-success" (click)="onSaveChanges()">Save</button>
-    <div class="alert alert-danger" *ngIf="error">
-        <p>{{error}}</p>
     </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserApiService } from 'src/app/user-api.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class RegisterUserComponent implements OnInit {
   roleId = 1;
   error: any;
 
-  constructor(private userService: UserApiService) { }
+  constructor(private userService: UserApiService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -32,6 +32,7 @@ export class RegisterUserComponent implements OnInit {
     this.userService.RegisterUser(user).subscribe(
       res => {
         console.log(user)
+        this.router.navigate(['/home'])
       },
       error => {
         console.log(error)

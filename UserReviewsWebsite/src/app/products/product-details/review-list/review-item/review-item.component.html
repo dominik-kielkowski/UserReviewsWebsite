@@ -2,11 +2,17 @@
     <div class="card-body p-4">
         <table class="tg">
             <thead>
+                <div>
+                    <div>
+                    <h5>{{item.title}}</h5>
+                    </div>
+                    <div> 
+                    <h5 class="tg-0lax">{{item.score}}</h5>
+                    </div>
+                </div>
                 <tr>
                     <th class="tg-0lax">
-                        <h5>{{item.title}}</h5>
                     </th>
-                    <th class="tg-0lax">{{item.score}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,40 +34,29 @@
 <div *ngIf="inEditMode">
     <div class="card">
         <div class="card-body p-4">
-            <table class="tg">
-                <thead>
-                    <tr>
-                        <th class="tg-0lax">
-                            <h5>{{item.title}}</h5>
-                            <input type="text" name="reviewTitle" [(ngModel)]="reviewTitle">
-
-                        </th>
-                        <th class="tg-0lax">{{item.score}}</th>
-                        <select [(ngModel)]="reviewScore" name="reviewScore">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="tg-0lax">{{item.user.username}}</td>
-                    </tr>
-                    <tr>
-                        <td class="tg-0lax">{{item.reviewBody}}</td>
-                        <input type="text" name="reviewBody" [(ngModel)]="reviewBody">
-
-                    </tr>
-                </tbody>
-            </table>
+                        <div class="w-100">
+                            <div class="form-outline">
+                                <label for="title">Title: </label>
+                                <input class="form-control" id="title" [(ngModel)]="reviewTitle" name="reviewTitle" />
+                            </div>
+                            <label for="score">Score: </label>
+                            <select id="score" [(ngModel)]="reviewScore" name="reviewScore">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="reviewBody">Review Body: </label>
+                            <input class="form-control" id="reviewBody" [(ngModel)]="reviewBody" name="reviewBody" />
+                        </div>
             <div>
                 <button type="button" class="btn btn-success" (click)="onSubmitEditReview()">Submit</button>
                 <button type="button" class="btn btn-danger" (click)="onEditReview()">Cancel</button>
