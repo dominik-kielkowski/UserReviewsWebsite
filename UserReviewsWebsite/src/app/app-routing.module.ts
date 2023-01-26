@@ -1,6 +1,5 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-//import { RoleGuard } from './guards/role.guard';
 import { ManagementDetailsComponent } from './manager-panel/management-details/management-details.component';
 import { ManagerPanelComponent } from './manager-panel/manager-panel.component';
 import { ProductAddComponent } from './manager-panel/product-add/product-add.component';
@@ -16,11 +15,8 @@ const routes: Routes = [
   { path: 'login', component: LoginUserComponent },
   { path: 'register', component: RegisterUserComponent },
   { path: 'manage', component: ManagerPanelComponent, children: [
-  { path: ':id', component: ManagementDetailsComponent},
-  ]},
-  { path: 'add', component: ProductAddComponent
-  //, canActivate: [RoleGuard], data:{expectedRoles: ['Admin']}
-}
+  { path: ':id', component: ManagementDetailsComponent}]},
+  { path: 'add', component: ProductAddComponent}
 ]
 
 @NgModule({
