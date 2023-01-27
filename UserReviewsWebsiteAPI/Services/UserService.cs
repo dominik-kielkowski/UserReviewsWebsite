@@ -24,18 +24,6 @@ namespace UserReviewsWebsiteAPI.Services
             _authenticationSettings = authenticationSettings;
         }
 
-        public IEnumerable<User> GetUsers()
-        {
-            List<User> users = _db.Users.ToList();
-
-            if (users == null)
-            {
-                throw new NotFoundException("Users not found");
-            }
-
-            return users;
-        }
-
         public User GetUser(string id)
         {
             int userId = Convert.ToInt32(id);
@@ -109,34 +97,5 @@ namespace UserReviewsWebsiteAPI.Services
             _db.SaveChanges();
 
         }
-
-        public void UpdateUser(int id, User updateUser)
-        {
-            User user = _db.Users.FirstOrDefault(r => r.Id == id);
-
-            if (user == null)
-            {
-                throw new NotFoundException("User not found");
-            }
-
-            user.Username = updateUser.Username;
-
-            _db.SaveChanges();
-        }
-
-        public void DeleteUser(int id)
-        {
-            User user = _db.Users.FirstOrDefault(r => r.Id == id);
-
-            if (user == null)
-            {
-                throw new NotFoundException("User not found");
-            }
-
-            _db.Users.Remove(user);
-            _db.SaveChanges();
-        }
-
-
     }
 }

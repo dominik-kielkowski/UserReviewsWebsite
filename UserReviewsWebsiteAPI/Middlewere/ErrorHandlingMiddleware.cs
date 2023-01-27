@@ -1,4 +1,5 @@
-﻿using UserReviewsWebsiteAPI.Exceptions;
+﻿using Microsoft.AspNetCore.Http;
+using UserReviewsWebsiteAPI.Exceptions;
 
 namespace UserReviewsWebsiteAPI.Middlewere
 {
@@ -24,6 +25,11 @@ namespace UserReviewsWebsiteAPI.Middlewere
             {
                 context.Response.StatusCode = 401;
                 await context.Response.WriteAsync(incorrectlogindetailsException.Message);
+            }
+            catch (InaccessibleException inaccessibleException)
+            {
+                context.Response.StatusCode = 401;
+                await context.Response.WriteAsync(inaccessibleException.Message);
             }
             catch (Exception ex)
             {

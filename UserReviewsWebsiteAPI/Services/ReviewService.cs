@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using UserReviewsWebsiteAPI.Database.Data;
-using UserReviewsWebsiteAPI.Authorization;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -11,13 +10,11 @@ namespace UserReviewsWebsiteAPI.Services
     public class ReviewService : IReviewService
     {
         private readonly ApplicationDbContext _db;
-        private readonly IAuthorizationService _authorizationService;
         private readonly IUserContextService _userContextService;
 
-        public ReviewService(ApplicationDbContext db, IAuthorizationService authorizationService, IUserContextService userContextService)
+        public ReviewService(ApplicationDbContext db, IUserContextService userContextService)
         {
             _db = db;
-            _authorizationService = authorizationService;
             _userContextService = userContextService;
         }
 
@@ -66,49 +63,31 @@ namespace UserReviewsWebsiteAPI.Services
 
         public void UpdateReview(int id, ReviewDto updateReview)
         {
-            Review review = _db.Reviews.FirstOrDefault(p => p.Id == id);
+            int currentUserId = _userContextService.GetUserId;
+
+            var review = _db.Reviews.Include(r => r.User).Where(review => review.User.Id == currentUserId).FirstOrDefault(review => review.Id == id);
 
             if (review == null)
             {
-                throw new NotFoundException("Review not found");
+                throw new NotFoundException("Review inaccessible");
             }
-
-            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, review,
-                new ResourceOperationRequirement(ResourceOperation.Update)).Result;
-
-            if (!authorizationResult.Succeeded)
-            {
-                throw new Exception("Unotharized");
-            }
-
-            //Product product = _db.Products.FirstOrDefault(p => p.Id == updateReview.ProductId);
-            //User user = _db.Users.FirstOrDefault(p => p.Id == updateReview.UserId);
 
             review.Title = updateReview.Title;
             review.ReviewBody = updateReview.ReviewBody;
             review.Score = updateReview.Score;
-            //review.Product = product;
-            //review.User = user;
 
             _db.SaveChanges();
         }
 
         public void DeleteReview(int id)
         {
-            Review review = _db.Reviews.FirstOrDefault(r => r.Id == id);
+            int currentUserId = _userContextService.GetUserId;
+
+            var review = _db.Reviews.Include(r => r.User).Where(review => review.User.Id == currentUserId).FirstOrDefault(review => review.Id == id);
 
             if (review == null)
             {
-                throw new NotFoundException("Review not found");
-            }
-
-            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, review,
-               new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
-
-
-            if (!authorizationResult.Succeeded)
-            {
-                throw new Exception("Unotharized");
+                throw new NotFoundException("Review inaccessible ");
             }
 
             _db.Reviews.Remove(review);

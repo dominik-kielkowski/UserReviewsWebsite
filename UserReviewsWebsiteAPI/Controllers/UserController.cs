@@ -18,13 +18,6 @@ namespace UserReviewsWebsiteAPI.Controllers
             _service = service;
         }
 
-        //[HttpGet]
-        //public ActionResult GetUsers()
-        //{
-        //    IEnumerable<User> users = _service.GetUsers();
-        //    return Ok(users);
-        //}
-
         [HttpGet]
         [Authorize]
         public ActionResult GetUser()
@@ -47,19 +40,5 @@ namespace UserReviewsWebsiteAPI.Controllers
             _service.RegisterUser(user);
             return Ok();
         }
-
-        //[HttpPut]
-        //public ActionResult UpdateUser(int id, User user)
-        //{
-        //    _service.UpdateUser(id, user);
-        //    return Ok();
-        //}
-
-        //[HttpDelete]
-        //public ActionResult DeleteUser(int id)
-        //{
-        //    _service.DeleteUser(id);
-        //    return Ok();
-        //}
     }
 }
