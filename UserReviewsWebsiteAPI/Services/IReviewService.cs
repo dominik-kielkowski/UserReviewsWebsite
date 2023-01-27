@@ -5,10 +5,10 @@ namespace UserReviewsWebsiteAPI.Services
 {
     public interface IReviewService
     {
-        void AddReview(ReviewDto createReview);
-        void DeleteReview(int id);
-        IEnumerable<Review> GetReview(int id);
-        IEnumerable<Review> GetReviews();
-        void UpdateReview(int id, ReviewDto updateReview);
+        Task AddReview(ReviewDto createReview);
+        Task DeleteReview(int id);
+        Task<IEnumerable<Review>> GetReview(int id);
+        Task<IEnumerable<Review>> GetReviews();
+        Task UpdateReview(int id, ReviewDto updateReview);
     }
 }

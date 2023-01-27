@@ -1,4 +1,5 @@
-﻿using UserReviewsWebsiteAPI.Database.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using UserReviewsWebsiteAPI.Database.Data;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -11,11 +12,11 @@ namespace UserReviewsWebsiteAPI.Services
             _db = db;
         }
 
-        public double GetAveregeScore(int productId)
+        public async Task<double> GetAveregeScore(int productId)
         {
-            if (_db.Reviews.Where(x => x.ProductId == productId).Any())
+            if (await _db.Reviews.Where(x => x.ProductId == productId).AnyAsync())
             {
-                var averege = _db.Reviews.Where(x => x.ProductId == productId).Average(x => x.Score);
+                var averege = await _db.Reviews.Where(x => x.ProductId == productId).AverageAsync(x => x.Score);
                 averege = Math.Round(averege, 1);
                 return averege;
             }

@@ -20,14 +20,14 @@ namespace UserReviewsWebsiteAPI.Controllers
         [HttpGet]
         public ActionResult GetProducts([FromQuery]ProductQuery query)
         {
-            PageResult<Product> product = _service.GetProducts(query);
+            Task<PageResult<Product>> product = _service.GetProducts(query);
             return Ok(product);
         }
 
         [HttpGet("{id}")]
         public ActionResult GetProduct(int id)
         {
-            Product product = _service.GetProduct(id);
+            Task<Product> product = _service.GetProduct(id);
             return Ok(product);
         }
 

@@ -2,6 +2,6 @@
 {
     public interface IProductScoreService
     {
-        double GetAveregeScore(int productId);
+        Task<double> GetAveregeScore(int productId);
     }
 }

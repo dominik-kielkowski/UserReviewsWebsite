@@ -4,6 +4,7 @@ using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -18,9 +19,9 @@ namespace UserReviewsWebsiteAPI.Services
             _userContextService = userContextService;
         }
 
-        public IEnumerable<Review> GetReviews()
+        public async Task<IEnumerable<Review>> GetReviews()
         {
-            List<Review> reviews = _db.Reviews.ToList();
+            List<Review> reviews = await _db.Reviews.ToListAsync();
 
             if (reviews == null)
             {
@@ -30,9 +31,9 @@ namespace UserReviewsWebsiteAPI.Services
             return reviews;
         }
 
-        public IEnumerable<Review> GetReview(int id)
+        public async Task<IEnumerable<Review>> GetReview(int id)
         {
-            List<Review> reviews = _db.Reviews.Include(r => r.User).Where(x => x.ProductId == id).ToList();
+            List<Review> reviews = await _db.Reviews.Include(r => r.User).Where(x => x.ProductId == id).ToListAsync();
 
             if (reviews == null)
             {
@@ -42,11 +43,11 @@ namespace UserReviewsWebsiteAPI.Services
             return reviews;
         }
 
-        public void AddReview(ReviewDto createReview)
+        public async Task AddReview(ReviewDto createReview)
         {
-            Product product = _db.Products.FirstOrDefault(p => p.Id == createReview.ProductId);
+            Product product = await _db.Products.FirstOrDefaultAsync(p => p.Id == createReview.ProductId);
 
-            User user = _db.Users.FirstOrDefault(p => p.Id == createReview.UserId);
+            User user = await _db.Users.FirstOrDefaultAsync(p => p.Id == createReview.UserId);
 
             Review review = new Review
             {
@@ -57,15 +58,15 @@ namespace UserReviewsWebsiteAPI.Services
                 User = user
             };
 
-            _db.Reviews.Add(review);
-            _db.SaveChanges();
+            await _db.Reviews.AddAsync(review);
+            await _db.SaveChangesAsync();
         }
 
-        public void UpdateReview(int id, ReviewDto updateReview)
+        public async Task UpdateReview(int id, ReviewDto updateReview)
         {
             int currentUserId = _userContextService.GetUserId;
 
-            var review = _db.Reviews.Include(r => r.User).Where(review => review.User.Id == currentUserId).FirstOrDefault(review => review.Id == id);
+            var review = await _db.Reviews.Include(r => r.User).Where(review => review.User.Id == currentUserId).FirstOrDefaultAsync(review => review.Id == id);
 
             if (review == null)
             {
@@ -76,14 +77,14 @@ namespace UserReviewsWebsiteAPI.Services
             review.ReviewBody = updateReview.ReviewBody;
             review.Score = updateReview.Score;
 
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
 
-        public void DeleteReview(int id)
+        public async Task DeleteReview(int id)
         {
             int currentUserId = _userContextService.GetUserId;
 
-            var review = _db.Reviews.Include(r => r.User).Where(review => review.User.Id == currentUserId).FirstOrDefault(review => review.Id == id);
+            var review = await _db.Reviews.Include(r => r.User).Where(review => review.User.Id == currentUserId).FirstOrDefaultAsync(review => review.Id == id);
 
             if (review == null)
             {
@@ -91,7 +92,7 @@ namespace UserReviewsWebsiteAPI.Services
             }
 
             _db.Reviews.Remove(review);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
     }
 }

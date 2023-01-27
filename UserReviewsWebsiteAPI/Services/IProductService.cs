@@ -5,10 +5,10 @@ namespace UserReviewsWebsiteAPI.Services
 {
     public interface IProductService
     {
-        void AddProduct(ProductDto createProduct);
-        void DeleteProduct(int id);
-        Product GetProduct(int id);
-        PageResult<Product> GetProducts(ProductQuery query);
-        void UpdateProduct(int id, ProductDto updateProduct);
+        Task AddProduct(ProductDto createProduct);
+        Task DeleteProduct(int id);
+        Task<Product> GetProduct(int id);
+        Task<PageResult<Product>> GetProducts(ProductQuery query);
+        Task UpdateProduct(int id, ProductDto updateProduct);
     }
 }

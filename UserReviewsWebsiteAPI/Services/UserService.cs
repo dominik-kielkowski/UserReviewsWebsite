@@ -24,10 +24,10 @@ namespace UserReviewsWebsiteAPI.Services
             _authenticationSettings = authenticationSettings;
         }
 
-        public User GetUser(string id)
+        public async Task<User> GetUser(string id)
         {
             int userId = Convert.ToInt32(id);
-            User user = _db.Users.Include(x => x.Role).FirstOrDefault(x => x.Id == userId);
+            User user = await _db.Users.Include(x => x.Role).FirstOrDefaultAsync(x => x.Id == userId);
 
             if (user == null)
             {
@@ -37,9 +37,9 @@ namespace UserReviewsWebsiteAPI.Services
             return user;
         }
 
-        public string GenerateJwt(LoginDto loginUser)
+        public async Task<string> GenerateJwt(LoginDto loginUser)
         {
-            var user = _db.Users.Include(x => x.Role).FirstOrDefault(u => u.Email == loginUser.Email && u.Username == loginUser.Username);
+            var user = await _db.Users.Include(x => x.Role).FirstOrDefaultAsync(u => u.Email == loginUser.Email && u.Username == loginUser.Username);
 
             if(user == null)
             {
@@ -73,9 +73,9 @@ namespace UserReviewsWebsiteAPI.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public void RegisterUser(RegisterDto createUser)
+        public async Task RegisterUser(RegisterDto createUser)
         {
-            Role role = _db.Role.FirstOrDefault(r => r.Id == createUser.RoleId);
+            Role role = await _db.Role.FirstOrDefaultAsync(r => r.Id == createUser.RoleId);
 
 
             User user = new User
@@ -94,8 +94,7 @@ namespace UserReviewsWebsiteAPI.Services
             user.PasswordHash = hashedPassword;
 
             _db.Users.Add(user);
-            _db.SaveChanges();
-
+            await _db.SaveChangesAsync();
         }
     }
 }

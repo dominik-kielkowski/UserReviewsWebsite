@@ -20,43 +20,43 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetReviews()
+        public async Task<ActionResult> GetReviews()
         {
-            IEnumerable<Review> reviews = _service.GetReviews();
+            IEnumerable<Review> reviews = await _service.GetReviews();
 
             return Ok(reviews);
         }
 
         [HttpGet("{id}")]
-        public ActionResult GetReview(int id)
+        public async Task<ActionResult> GetReview(int id)
         {
-            IEnumerable<Review> review = _service.GetReview(id);
+            IEnumerable<Review> review = await _service.GetReview(id);
 
             return Ok(review);
         }
 
         [HttpPost]
-        public ActionResult AddReview(ReviewDto createReview)
+        public async Task<ActionResult> AddReview(ReviewDto createReview)
         {
-            _service.AddReview(createReview);
+            await _service.AddReview(createReview);
 
             return Ok();
         }
 
         [Authorize]
         [HttpPut("{id}")]
-        public ActionResult UpdateReview(int id, ReviewDto updateReview)
+        public async Task<ActionResult> UpdateReview(int id, ReviewDto updateReview)
         {
-            _service.UpdateReview(id, updateReview);
+            await _service.UpdateReview(id, updateReview);
 
             return Ok();
         }
 
         [Authorize]
         [HttpDelete("{id}")]
-        public ActionResult DeleteReview(int id)
+        public async Task<ActionResult> DeleteReview(int id)
         {
-            _service.DeleteReview(id);
+            await _service.DeleteReview(id);
 
             return Ok();
         }

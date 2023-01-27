@@ -20,22 +20,22 @@ namespace UserReviewsWebsiteAPI.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult GetUser()
-         {
+        public async Task<ActionResult> GetUser()
+        {
             string userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
-            User user = _service.GetUser(userId);
+            var user = _service.GetUser(userId);
             return Ok(user);
         }
 
         [HttpPost("login")]
-        public ActionResult loginUser(LoginDto user)
+        public async Task<ActionResult> loginUser(LoginDto user)
         {
-            string token = _service.GenerateJwt(user);
+            Task<string> token = _service.GenerateJwt(user);
             return Ok( new TokenDto { Token = token });
         }
 
         [HttpPost]
-        public ActionResult RegisterUser(RegisterDto user)
+        public async Task<ActionResult> RegisterUser(RegisterDto user)
         {
             _service.RegisterUser(user);
             return Ok();

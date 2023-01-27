@@ -16,10 +16,10 @@ namespace UserReviewsWebsiteAPI.Services
             _db = db;
         }
 
-        public PageResult<Product> GetProducts(ProductQuery query)
+        public async Task<PageResult<Product>> GetProducts(ProductQuery query)
         {
             var baseQuery = _db.Products.Include(p => p.Reviews).Where(p => query.SearchPhrase == null ||
-            (p.Name.ToLower().Contains(query.SearchPhrase.ToLower())));
+            p.Name.ToLower().Contains(query.SearchPhrase.ToLower()));
 
             if (!string.IsNullOrEmpty(query.SortBy))
             {
@@ -60,9 +60,9 @@ namespace UserReviewsWebsiteAPI.Services
             return result;
         }
 
-        public Product GetProduct(int id)
+        public async Task<Product> GetProduct(int id)
         {
-            Product product = _db.Products.FirstOrDefault(r => r.Id == id);
+            Product product = await _db.Products.FirstOrDefaultAsync(r => r.Id == id);
 
             if (product == null)
             {
@@ -72,7 +72,7 @@ namespace UserReviewsWebsiteAPI.Services
             return product;
         }
 
-        public void AddProduct(ProductDto createProduct)
+        public async Task AddProduct(ProductDto createProduct)
         {
             Product product = new Product
             {
@@ -83,13 +83,13 @@ namespace UserReviewsWebsiteAPI.Services
             };
 
             _db.Products.Add(product);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
 
         }
 
-        public void UpdateProduct(int id, ProductDto updateProduct)
+        public async Task UpdateProduct(int id, ProductDto updateProduct)
         {
-            Product product = _db.Products.FirstOrDefault(r => r.Id == id);
+            Product product = await _db.Products.FirstOrDefaultAsync(r => r.Id == id);
 
             if (product == null)
             {
@@ -100,12 +100,12 @@ namespace UserReviewsWebsiteAPI.Services
             product.Description = updateProduct.Description;
             product.ImagePath = updateProduct.ImagePath;
 
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
 
-        public void DeleteProduct(int id)
+        public async Task DeleteProduct(int id)
         {
-            Product product = _db.Products.FirstOrDefault(r => r.Id == id);
+            Product product = await _db.Products.FirstOrDefaultAsync(r => r.Id == id);
 
             if (product == null)
             {
@@ -113,7 +113,7 @@ namespace UserReviewsWebsiteAPI.Services
             }
 
             _db.Products.Remove(product);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
     }
 }
