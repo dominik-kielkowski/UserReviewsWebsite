@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ProductApiService } from 'src/app/product-api.service';
-import { ProductScoreApiService } from 'src/app/product-score-api.service';
-import { ReviewApiService } from 'src/app/review-api.service';
-import { UserApiService } from 'src/app/user-api.service';
+import { ProductApiService } from 'src/app/services/product-api.service';
+import { ProductScoreApiService } from 'src/app/services/product-score-api.service';
+import { ReviewApiService } from 'src/app/services/review-api.service';
+import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({
   selector: 'app-product-details',
@@ -22,10 +22,22 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
-      this.productService.GetProduct(this.id).subscribe((product) => { this.product = product });
+      this.productService.GetProduct(this.id).subscribe(res => {
+        console.log(res)
+        this.product = res;
+      },
+      error => {
+        console.log(error)
+      });
     })
 
-    this.scoreService.GetProduct(this.id).subscribe((score) => { this.score = score });
+    this.scoreService.GetProductScore(this.id).subscribe(res => {
+      console.log(res)
+      this.score = res;
+    },
+    error => {
+      console.log(error)
+    });
   };
 
   onShowAddReview() {

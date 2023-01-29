@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserApiService } from 'src/app/user-api.service';
+import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({
   selector: 'app-login-user',
@@ -16,8 +16,8 @@ export class LoginUserComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.service.LoginUser(form.value).subscribe(
-      (response: any) => {
-        localStorage.setItem('token', response.token);
+      res => {
+        localStorage.setItem('token', res.token);
         form.reset();
         window.location.reload();
       },

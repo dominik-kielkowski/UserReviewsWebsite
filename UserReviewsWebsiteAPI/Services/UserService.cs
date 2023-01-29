@@ -37,9 +37,9 @@ namespace UserReviewsWebsiteAPI.Services
             return user;
         }
 
-        public async Task<string> GenerateJwt(LoginDto loginUser)
+        public string GenerateJwt(LoginDto loginUser)
         {
-            var user = await _db.Users.Include(x => x.Role).FirstOrDefaultAsync(u => u.Email == loginUser.Email && u.Username == loginUser.Username);
+            var user = _db.Users.Include(x => x.Role).FirstOrDefault(u => u.Email == loginUser.Email && u.Username == loginUser.Username);
 
             if(user == null)
             {

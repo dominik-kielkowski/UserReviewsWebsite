@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { UserApiService } from '../user-api.service';
+import { UserApiService } from '../services/user-api.service';
 
 @Component({
   selector: 'app-header',

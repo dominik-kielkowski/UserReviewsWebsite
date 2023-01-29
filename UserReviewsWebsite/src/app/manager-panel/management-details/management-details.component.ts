@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ProductApiService } from 'src/app/product-api.service';
+import { ProductApiService } from 'src/app/services/product-api.service';
 
 @Component({
   selector: 'app-management-details',

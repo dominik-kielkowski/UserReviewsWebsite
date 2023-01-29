@@ -18,17 +18,17 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetProducts([FromQuery]ProductQuery query)
+        public async Task<ActionResult> GetProductsAsync([FromQuery]ProductQuery query)
         {
             Task<PageResult<Product>> product = _service.GetProducts(query);
-            return Ok(product);
+            return Ok(await product);
         }
 
         [HttpGet("{id}")]
-        public ActionResult GetProduct(int id)
+        public async Task<ActionResult> GetProductAsync(int id)
         {
             Task<Product> product = _service.GetProduct(id);
-            return Ok(product);
+            return Ok(await product);
         }
 
 

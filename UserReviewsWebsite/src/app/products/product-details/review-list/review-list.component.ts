@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ReviewApiService } from 'src/app/review-api.service';
+import { ReviewApiService } from 'src/app/services/review-api.service';
 
 @Component({
   selector: 'app-review-list',

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ReviewApiService } from 'src/app/review-api.service';
-import { UserApiService } from 'src/app/user-api.service';
+import { Review } from 'src/app/models/review.model';
+import { ReviewApiService } from 'src/app/services/review-api.service';
+import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({
   selector: 'app-review-post',
@@ -16,7 +17,7 @@ export class ReviewPostComponent implements OnInit {
   userDetails: any;
   title = "";
   reviewBody = "";
-  score = "";
+  score = 0;
 
   ngOnInit(): void {
     this.userService.GetUserProfile().subscribe(
@@ -27,7 +28,7 @@ export class ReviewPostComponent implements OnInit {
   }
 
   addReview() {
-    var review = {
+    var review: Review= {
       Title: this.title,
       ReviewBody: this.reviewBody,
       Score: this.score,

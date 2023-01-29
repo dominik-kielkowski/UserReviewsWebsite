@@ -16,10 +16,10 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult GetAveregeScore(int id)
+        public async Task<ActionResult> GetAveregeScore(int id)
         {
             var score = _sevice.GetAveregeScore(id);
-            return Ok(score);
+            return Ok(await score);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace UserReviewsWebsiteAPI.Services
     public interface IUserService
     {
         Task RegisterUser(RegisterDto createUser);
-        Task<string> GenerateJwt(LoginDto loginUser);
+        string GenerateJwt(LoginDto loginUser);
         Task<User> GetUser(string id);
     }
 }

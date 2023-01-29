@@ -72,7 +72,7 @@ namespace UserReviewsWebsiteAPI.Services
             return product;
         }
 
-        public async Task AddProduct(ProductDto createProduct)
+        public void AddProduct(ProductDto createProduct)
         {
             Product product = new Product
             {
@@ -83,13 +83,13 @@ namespace UserReviewsWebsiteAPI.Services
             };
 
             _db.Products.Add(product);
-            await _db.SaveChangesAsync();
+            _db.SaveChanges();
 
         }
 
-        public async Task UpdateProduct(int id, ProductDto updateProduct)
+        public void UpdateProduct(int id, ProductDto updateProduct)
         {
-            Product product = await _db.Products.FirstOrDefaultAsync(r => r.Id == id);
+            Product product = _db.Products.FirstOrDefault(r => r.Id == id);
 
             if (product == null)
             {
@@ -100,12 +100,12 @@ namespace UserReviewsWebsiteAPI.Services
             product.Description = updateProduct.Description;
             product.ImagePath = updateProduct.ImagePath;
 
-            await _db.SaveChangesAsync();
+            _db.SaveChanges();
         }
 
-        public async Task DeleteProduct(int id)
+        public void DeleteProduct(int id)
         {
-            Product product = await _db.Products.FirstOrDefaultAsync(r => r.Id == id);
+            Product product = _db.Products.FirstOrDefault(r => r.Id == id);
 
             if (product == null)
             {
@@ -113,7 +113,7 @@ namespace UserReviewsWebsiteAPI.Services
             }
 
             _db.Products.Remove(product);
-            await _db.SaveChangesAsync();
+            _db.SaveChangesAsync();
         }
     }
 }

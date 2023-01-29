@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductApiService } from 'src/app/product-api.service';
+import { ProductQuery } from 'src/app/models/product-query.model';
+import { ProductApiService } from 'src/app/services/product-api.service';
 
 @Component({
   selector: 'app-product-list',
@@ -30,8 +31,8 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts() {
-    var query = {
-      SerchPhrase: this.SearchPhrase,
+    const query: ProductQuery = {
+      SearchPhrase: this.SearchPhrase,
       PageNumber: this.PageNumber,
       PageSize: this.pageSize,
       SortBy: this.SortBy,
@@ -45,8 +46,6 @@ export class ProductListComponent implements OnInit {
         this.itemsFrom = response.itemsFrom
         this.itemsTo = response.itemsTo
         this.totalItemsCount = response.totalItemsCount
-        console.log(response)
-
       },
       error: err => console.log(err)
     });

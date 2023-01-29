@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserApiService } from 'src/app/user-api.service';
+import { User } from 'src/app/models/User.model';
+import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({
   selector: 'app-register-user',
@@ -21,7 +22,7 @@ export class RegisterUserComponent implements OnInit {
 
   onSubmit() {
 
-    var user = {
+      const user: User = {
       Username: this.username,
       Email: this.email,
       PasswordHash: this.passwordHash,

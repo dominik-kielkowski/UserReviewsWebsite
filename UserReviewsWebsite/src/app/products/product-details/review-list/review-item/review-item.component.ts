@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ReviewApiService } from 'src/app/review-api.service';
+import { ReviewApiService } from 'src/app/services/review-api.service';
 
 @Component({
   selector: 'app-review-item',

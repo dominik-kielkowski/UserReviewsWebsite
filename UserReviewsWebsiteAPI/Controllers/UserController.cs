@@ -23,21 +23,21 @@ namespace UserReviewsWebsiteAPI.Controllers
         public async Task<ActionResult> GetUser()
         {
             string userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
-            var user = _service.GetUser(userId);
+            var user = await _service.GetUser(userId);
             return Ok(user);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> loginUser(LoginDto user)
+        public ActionResult loginUser(LoginDto user)
         {
-            Task<string> token = _service.GenerateJwt(user);
+            string token = _service.GenerateJwt(user);
             return Ok( new TokenDto { Token = token });
         }
 
         [HttpPost]
-        public async Task<ActionResult> RegisterUser(RegisterDto user)
+        public async Task<ActionResult> RegisterUserAsync(RegisterDto user)
         {
-            _service.RegisterUser(user);
+            await _service.RegisterUser(user);
             return Ok();
         }
     }

@@ -2,6 +2,6 @@
 {
     public class TokenDto
     {
-        public Task<string> Token { get; set; }
+        public string Token { get; set; }
     }
 }

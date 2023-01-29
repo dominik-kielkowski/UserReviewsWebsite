@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductApiService } from 'src/app/product-api.service';
+import { Product } from 'src/app/models/product.model';
+import { ProductApiService } from 'src/app/services/product-api.service';
 
 @Component({
   selector: 'app-product-add',
@@ -11,7 +12,7 @@ export class ProductAddComponent implements OnInit {
   imagePath = "";
   productName = "";
   productDescription = "";
-  error: any;
+  error?: Error;
 
   constructor(private productService: ProductApiService, private router: Router) { }
 
@@ -19,11 +20,10 @@ export class ProductAddComponent implements OnInit {
   }
 
   onSaveChanges() {
-    var product = {
+    const product: Product = {
       Name: this.productName,
       ImagePath: this.imagePath,
-      Description: this.productDescription,
-      AverageScore: 10
+      Description: this.productDescription
     }
 
     this.productService.AddProduct(product).subscribe(

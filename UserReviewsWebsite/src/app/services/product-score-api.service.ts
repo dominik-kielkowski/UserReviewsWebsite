@@ -11,7 +11,7 @@ export class ProductScoreApiService {
 
   constructor(private http: HttpClient) { }
 
-  GetProduct(id: number): Observable<any> {
+  GetProductScore(id: number): Observable<any> {
     return this.http.get<any>(this.productAPIUrl + `/ProductScore/${id}`);
   }
 }

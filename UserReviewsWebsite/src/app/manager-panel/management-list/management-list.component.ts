@@ -1,6 +1,7 @@
 import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { ProductApiService } from 'src/app/product-api.service';
+import { ProductQuery } from 'src/app/models/product-query.model';
+import { ProductApiService } from 'src/app/services/product-api.service';
 
 @Component({
   selector: 'app-management-list',
@@ -28,8 +29,8 @@ export class ManagementListComponent implements OnInit {
   }
 
   getProducts() {
-    var query = {
-      SerchPhrase: this.SearchPhrase,
+    const query: ProductQuery = {
+      SearchPhrase: this.SearchPhrase,
       PageNumber: this.PageNumber,
       PageSize: this.pageSize,
       SortBy: this.SortBy,
