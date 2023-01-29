@@ -9,13 +9,12 @@ import { ProductScoreApiService } from 'src/app/services/product-score-api.servi
 export class ProductItemComponent implements OnInit {
 
   @Input() item: any;
-  score: any;
+  score!: number;
 
   constructor(private scoreService: ProductScoreApiService) { }
 
   ngOnInit(): void {
     this.scoreService.GetProductScore(this.item.id).subscribe(res => {
-      console.log(res)
       this.score = res;
     },
     error => {
