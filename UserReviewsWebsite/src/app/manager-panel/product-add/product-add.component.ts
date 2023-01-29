@@ -9,9 +9,12 @@ import { ProductApiService } from 'src/app/services/product-api.service';
   styleUrls: ['./product-add.component.css']
 })
 export class ProductAddComponent implements OnInit {
-  imagePath = "";
-  productName = "";
-  productDescription = "";
+
+  public product: Product = {
+    Name: '',
+    Description: '',
+    ImagePath: ''
+  }
   error?: Error;
 
   constructor(private productService: ProductApiService, private router: Router) { }
@@ -21,9 +24,9 @@ export class ProductAddComponent implements OnInit {
 
   onSaveChanges() {
     const product: Product = {
-      Name: this.productName,
-      ImagePath: this.imagePath,
-      Description: this.productDescription
+      Name: this.product.Name,
+      ImagePath: this.product.ImagePath,
+      Description: this.product.Description
     }
 
     this.productService.AddProduct(product).subscribe(

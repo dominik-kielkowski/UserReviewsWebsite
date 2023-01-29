@@ -7,13 +7,13 @@
                             <div class="w-100">
                                     <div class="form-outline">
                                         <label for="imagePath">Image Path:</label>
-                                        <input type="text" name="imagePath" [(ngModel)]="imagePath">
+                                        <input type="text" name="imagePath" [(ngModel)]="product.ImagePath">
                                     </div>
                                     <label for="productName">Title:</label>
-                                    <input type="text" name="productName" [(ngModel)]="productName">
+                                    <input type="text" name="productName" [(ngModel)]="product.Name">
                                     <div class="form-outline">
                                         <label for="productDescription">Description:</label>
-                                        <input type="text" name="productDescription" [(ngModel)]="productDescription">
+                                        <input type="text" name="productDescription" [(ngModel)]="product.Description">
                                     </div>
                                     <div class="d-flex justify-content-between mt-3">
                                         <button type="button" class="btn btn-danger" routerLink="/manage">Cancel</button>

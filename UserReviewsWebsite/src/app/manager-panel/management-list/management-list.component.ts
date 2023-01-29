@@ -11,16 +11,18 @@ import { ProductApiService } from 'src/app/services/product-api.service';
 export class ManagementListComponent implements OnInit {
   productsList: any;
 
-  PageNumber = 1;
-  pageSize = 1;
-  SearchPhrase = "";
-  SortBy = "Name"
-  SortDirection = "Descending"
+  public query: ProductQuery = {
+    SearchPhrase: '',
+    PageNumber: 1,
+    PageSize: 1,
+    SortBy: 'Name',
+    SortDirection: 'Descending'
+  }
 
-  totalPages: any;
-  itemsFrom: any;
-  itemsTo: any;
-  totalItemsCount: any;
+  totalPages!: number;
+  itemsFrom!: number;
+  itemsTo!: number;
+  totalItemsCount!: number;
 
   constructor(private productService: ProductApiService) { }
 
@@ -30,11 +32,11 @@ export class ManagementListComponent implements OnInit {
 
   getProducts() {
     const query: ProductQuery = {
-      SearchPhrase: this.SearchPhrase,
-      PageNumber: this.PageNumber,
-      PageSize: this.pageSize,
-      SortBy: this.SortBy,
-      SortDirection: this.SortDirection
+      SearchPhrase: this.query.SearchPhrase,
+      PageNumber: this.query.PageNumber,
+      PageSize: this.query.PageSize,
+      SortBy: this.query.SortBy,
+      SortDirection: this.query.SortDirection
     }
 
     this.productService.GetProducts(query).subscribe({
@@ -52,52 +54,52 @@ export class ManagementListComponent implements OnInit {
   }
 
   onSwitchSortBy() {
-    if (this.SortBy == "Name") {
-      this.SortBy = "Score"
+    if (this.query.SortBy == "Name") {
+      this.query.SortBy = "Score"
     }
     else {
-      this.SortBy = "Name"
+      this.query.SortBy = "Name"
     }
 
     this.getProducts()
   }
 
   onSwitchSortDirection() {
-    if (this.SortDirection == "Descending") {
-      this.SortDirection = "Ascending"
+    if (this.query.SortDirection == "Descending") {
+      this.query.SortDirection = "Ascending"
     }
     else {
-      this.SortDirection = "Descending"
+      this.query.SortDirection = "Descending"
     }
 
-    console.log(this.SortDirection)
+    console.log(this.query.SortDirection)
     this.getProducts()
   }
 
   onNextPage() {
-    this.PageNumber += 1
+    this.query.PageNumber += 1
     this.getProducts()
   }
 
   onPreviousPage() {
-    this.PageNumber -= 1
+    this.query.PageNumber -= 1
     this.getProducts()
   }
 
   onChangePageSize() {
-    if (this.pageSize == 1) {
-      this.pageSize = 3
-      this.PageNumber = 1;
+    if (this.query.PageSize == 1) {
+      this.query.PageSize = 3
+      this.query.PageNumber = 1;
       this.getProducts()
     }
-    else if (this.pageSize == 3) {
-      this.pageSize = 5
-      this.PageNumber = 1;
+    else if (this.query.PageSize == 3) {
+      this.query.PageSize = 5
+      this.query.PageNumber = 1;
       this.getProducts()
     }
     else {
-      this.pageSize = 1
-      this.PageNumber = 1;
+      this.query.PageSize = 1
+      this.query.PageNumber = 1;
       this.getProducts()
     }
   }

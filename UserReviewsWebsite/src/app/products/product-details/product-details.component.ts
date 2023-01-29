@@ -15,7 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   id!: number;
   product: any;
   showAddReview = false;
-  score: any;
+  score!: number;
 
   constructor(private productService: ProductApiService, private route: ActivatedRoute, private scoreService: ProductScoreApiService) { }
 
@@ -23,7 +23,6 @@ export class ProductDetailsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       this.productService.GetProduct(this.id).subscribe(res => {
-        console.log(res)
         this.product = res;
       },
       error => {
@@ -32,7 +31,6 @@ export class ProductDetailsComponent implements OnInit {
     })
 
     this.scoreService.GetProductScore(this.id).subscribe(res => {
-      console.log(res)
       this.score = res;
     },
     error => {

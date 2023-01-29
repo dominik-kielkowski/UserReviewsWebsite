@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/User.model';
+import { User } from 'src/app/models/user.model';
 import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({
@@ -9,11 +9,14 @@ import { UserApiService } from 'src/app/services/user-api.service';
   styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent implements OnInit {
-  username = "";
-  email = "";
-  passwordHash = "";
-  roleId = 1;
-  error: any;
+  public user: User = {
+    Username: '',
+    Email: '',
+    PasswordHash: '',
+    RoleId: 1
+  };
+  
+  error?: Error;
 
   constructor(private userService: UserApiService, private router: Router) { }
 
@@ -23,11 +26,13 @@ export class RegisterUserComponent implements OnInit {
   onSubmit() {
 
       const user: User = {
-      Username: this.username,
-      Email: this.email,
-      PasswordHash: this.passwordHash,
-      RoleId: this.roleId,
+      Username: this.user.Username,
+      Email: this.user.Email,
+      PasswordHash: this.user.PasswordHash,
+      RoleId: this.user.RoleId,
     }
+    console.log(user)
+    console.log(this.user)
 
 
     this.userService.RegisterUser(user).subscribe(

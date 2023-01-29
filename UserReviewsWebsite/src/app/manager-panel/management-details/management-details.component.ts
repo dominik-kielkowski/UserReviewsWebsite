@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Product } from 'src/app/models/product.model';
 import { ProductApiService } from 'src/app/services/product-api.service';
 
 @Component({
@@ -9,13 +10,16 @@ import { ProductApiService } from 'src/app/services/product-api.service';
 })
 export class ManagementDetailsComponent implements OnInit {
 
-  product: any;
+  public product: Product = {
+    Name: '',
+    Description: '',
+    ImagePath: ''
+  }
+
   id!: number;
   inEditMode = false;
-  productName: string = "";
-  imagePath: string = "";
-  productDescription: string = "";
-  error: any;
+
+  error!: Error;
 
 
   constructor(private route: ActivatedRoute, private productService: ProductApiService, private router: Router) { }
@@ -23,26 +27,26 @@ export class ManagementDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
-      this.productService.GetProduct(this.id).subscribe((product) => { this.product = product });
+      this.productService.GetProduct(this.id).subscribe(
+        res => {
+          this.product.Name = res.name
+          this.product.Description = res.description
+          this.product.ImagePath = res.imagePath
+      },
+        error => {
+        console.log(error)
+        this.error = error.error.title
+      });
     });
   };
 
   onSwitchToEdit() {
-    this.imagePath = this.product.imagePath
-    this.productName = this.product.name
-    this.productDescription = this.product.description
     this.inEditMode = !this.inEditMode
   }
 
   onSaveChanges() {
-    var product = {
-      Name: this.productName,
-      ImagePath: this.imagePath,
-      Description: this.productDescription,
-      AverageScore: 10
-    }
 
-    this.productService.UpdateProduct(this.id, product).subscribe(
+    this.productService.UpdateProduct(this.id, this.product).subscribe(
       res => {
         this.inEditMode = !this.inEditMode
 
