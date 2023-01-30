@@ -22,7 +22,8 @@ export class LoginUserComponent implements OnInit {
         window.location.reload();
       },
       error => {
-        this.error = error.error
+        this.error = error.error.title
+        console.log(error)
       }
     );
   }

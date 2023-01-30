@@ -62,7 +62,6 @@ export class ManagementDetailsComponent implements OnInit {
   onDeleteProduct() {
     this.productService.DeleteProduct(this.id).subscribe(
       res => {
-        window.location.reload();
         this.router.navigate(['manage'])
       },
       error => {
