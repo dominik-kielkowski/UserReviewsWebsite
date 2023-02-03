@@ -3,7 +3,7 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-6">
                 <div class="card">
-                    <app-review-item *ngFor="let review of reviewList$|async" [item]="review"></app-review-item>
+                    <app-review-item *ngFor="let review of reviewList" [item]="review"></app-review-item>
                 </div>
             </div>
         </div>

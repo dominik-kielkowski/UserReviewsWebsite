@@ -8,6 +8,7 @@ using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Exceptions;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
+using UserReviewsWebsiteAPI.Interfaces;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -27,7 +28,7 @@ namespace UserReviewsWebsiteAPI.Services
         public async Task<User> GetUser(string id)
         {
             int userId = Convert.ToInt32(id);
-            User user = await _db.Users.Include(x => x.Role).FirstOrDefaultAsync(x => x.Id == userId);
+            var user = await _db.Users.Include(x => x.Role).FirstOrDefaultAsync(x => x.Id == userId);
 
             if (user == null)
             {
@@ -73,12 +74,12 @@ namespace UserReviewsWebsiteAPI.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public async Task RegisterUser(RegisterDto createUser)
+        public async Task<User> RegisterUser(RegisterDto createUser)
         {
-            Role role = await _db.Role.FirstOrDefaultAsync(r => r.Id == createUser.RoleId);
+            var role = await _db.Role.FirstOrDefaultAsync(r => r.Id == createUser.RoleId);
 
 
-            User user = new User
+            var user = new User
             {
                 Username = createUser.Username,
                 Email = createUser.Email,
@@ -93,8 +94,10 @@ namespace UserReviewsWebsiteAPI.Services
 
             user.PasswordHash = hashedPassword;
 
-            _db.Users.Add(user);
+            await _db.Users.AddAsync(user);
             await _db.SaveChangesAsync();
+
+            return user;
         }
     }
 }

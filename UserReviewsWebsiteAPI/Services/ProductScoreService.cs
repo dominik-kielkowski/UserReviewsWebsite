@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UserReviewsWebsiteAPI.Database.Data;
+using UserReviewsWebsiteAPI.Interfaces;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -23,7 +24,5 @@ namespace UserReviewsWebsiteAPI.Services
 
             return 0;
         }
-
-
     }
 }

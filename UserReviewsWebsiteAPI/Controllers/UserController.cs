@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
-using UserReviewsWebsiteAPI.Services;
+using UserReviewsWebsiteAPI.Interfaces;
 
 namespace UserReviewsWebsiteAPI.Controllers
 {
@@ -20,7 +20,7 @@ namespace UserReviewsWebsiteAPI.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult> GetUser()
+        public async Task<ActionResult<User>> GetUser()
         {
             string userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var user = await _service.GetUser(userId);
@@ -35,10 +35,10 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> RegisterUserAsync(RegisterDto user)
+        public async Task<ActionResult<User>> RegisterUserAsync(RegisterDto user)
         {
-            await _service.RegisterUser(user);
-            return Ok();
+            var task = await _service.RegisterUser(user);
+            return Ok(task);
         }
     }
 }

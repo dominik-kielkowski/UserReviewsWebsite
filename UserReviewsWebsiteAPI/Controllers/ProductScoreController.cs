@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using UserReviewsWebsiteAPI.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using UserReviewsWebsiteAPI.Interfaces;
 
 namespace UserReviewsWebsiteAPI.Controllers
 {
@@ -16,10 +15,10 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetAveregeScore(int id)
+        public async Task<ActionResult<double>> GetAveregeScore(int id)
         {
-            var score = _sevice.GetAveregeScore(id);
-            return Ok(await score);
+            var score = await _sevice.GetAveregeScore(id);
+            return score;
         }
     }
 }

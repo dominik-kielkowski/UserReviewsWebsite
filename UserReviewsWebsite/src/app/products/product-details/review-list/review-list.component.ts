@@ -9,7 +9,7 @@ import { ReviewApiService } from 'src/app/services/review-api.service';
   styleUrls: ['./review-list.component.css']
 })
 export class ReviewListComponent implements OnInit {
-  reviewList$!: Observable<any[]>
+  reviewList!: any;
   id!: number;
 
   inspectionTypeMap: Map<number, string> = new Map()
@@ -19,7 +19,14 @@ export class ReviewListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
-      this.reviewList$ = this.service.GetReviews(this.id);
+      this.service.GetReviews(this.id).subscribe(
+        res => {
+          this.reviewList = res
+          console.log(res)
+        },
+        error => {
+          console.log(error)
+        })
     })
   }
 }

@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
-using UserReviewsWebsiteAPI.Services;
+using UserReviewsWebsiteAPI.Interfaces;
 
 namespace UserReviewsWebsiteAPI.Controllers
 {
@@ -18,42 +19,42 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetProductsAsync([FromQuery]ProductQuery query)
+        public async Task<ActionResult<PageResult<Product>>> GetProductsAsync([FromQuery]ProductQuery query)
         {
-            Task<PageResult<Product>> product = _service.GetProducts(query);
-            return Ok(await product);
+            var product = await _service.GetProducts(query);
+            return product;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetProductAsync(int id)
+        public async Task<ActionResult<Product>> GetProductAsync(int id)
         {
-            Task<Product> product = _service.GetProduct(id);
-            return Ok(await product);
+            var product = await _service.GetProduct(id);
+            return product;
         }
 
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public ActionResult AddProduct(ProductDto product)
+        public async Task<ActionResult<Product>> AddProduct(ProductDto product)
         {
-            _service.AddProduct(product);
-            return Ok();
+            var task = await _service.AddProduct(product);
+            return Ok(task);
         }
 
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
-        public ActionResult UpdateProduct(int id, ProductDto product)
+        public async Task<ActionResult<Product>> UpdateProduct(int id, ProductDto product)
         {
-            _service.UpdateProduct(id, product);
-            return Ok();
+            var task = await _service.UpdateProduct(id, product);
+            return Ok(task);
         }
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
-        public ActionResult DeleteProduct(int id)
+        public async Task<ActionResult<Product>> DeleteProduct(int id)
         {
-            _service.DeleteProduct(id);
-            return Ok();
+            var task = await _service.DeleteProduct(id);
+            return Ok(task);
         }
     }
 }

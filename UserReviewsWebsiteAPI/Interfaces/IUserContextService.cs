@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace UserReviewsWebsiteAPI.Services
+namespace UserReviewsWebsiteAPI.Interfaces
 {
     public interface IUserContextService
     {

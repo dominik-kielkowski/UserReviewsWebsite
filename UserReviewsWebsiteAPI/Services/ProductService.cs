@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using UserReviewsWebsiteAPI.Database.Data;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using UserReviewsWebsiteAPI.Exceptions;
+using UserReviewsWebsiteAPI.Interfaces;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -62,7 +64,7 @@ namespace UserReviewsWebsiteAPI.Services
 
         public async Task<Product> GetProduct(int id)
         {
-            Product product = await _db.Products.FirstOrDefaultAsync(r => r.Id == id);
+            var product = await _db.Products.FirstOrDefaultAsync(r => r.Id == id);
 
             if (product == null)
             {
@@ -72,9 +74,9 @@ namespace UserReviewsWebsiteAPI.Services
             return product;
         }
 
-        public void AddProduct(ProductDto createProduct)
+        public async Task<Product> AddProduct(ProductDto createProduct)
         {
-            Product product = new Product
+            var product = new Product
             {
 
                 Name = createProduct.Name,
@@ -82,14 +84,16 @@ namespace UserReviewsWebsiteAPI.Services
                 ImagePath = createProduct.ImagePath
             };
 
-            _db.Products.Add(product);
-            _db.SaveChanges();
+            await _db.Products.AddAsync(product);
+            await _db.SaveChangesAsync();
+
+            return product;
 
         }
 
-        public void UpdateProduct(int id, ProductDto updateProduct)
+        public async Task<Product> UpdateProduct(int id, ProductDto updateProduct)
         {
-            Product product = _db.Products.FirstOrDefault(r => r.Id == id);
+            var product = _db.Products.FirstOrDefault(r => r.Id == id);
 
             if (product == null)
             {
@@ -100,12 +104,14 @@ namespace UserReviewsWebsiteAPI.Services
             product.Description = updateProduct.Description;
             product.ImagePath = updateProduct.ImagePath;
 
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
+
+            return product;
         }
 
-        public void DeleteProduct(int id)
+        public async Task<Product> DeleteProduct(int id)
         {
-            Product product = _db.Products.FirstOrDefault(r => r.Id == id);
+            var product = _db.Products.FirstOrDefault(r => r.Id == id);
 
             if (product == null)
             {
@@ -113,7 +119,9 @@ namespace UserReviewsWebsiteAPI.Services
             }
 
             _db.Products.Remove(product);
-            _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
+
+            return product;
         }
     }
 }

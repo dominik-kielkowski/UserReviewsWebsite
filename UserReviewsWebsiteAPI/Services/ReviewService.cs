@@ -5,6 +5,8 @@ using UserReviewsWebsiteAPI.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using UserReviewsWebsiteAPI.Interfaces;
+using System.Collections.Generic;
 
 namespace UserReviewsWebsiteAPI.Services
 {
@@ -21,7 +23,7 @@ namespace UserReviewsWebsiteAPI.Services
 
         public async Task<IEnumerable<Review>> GetReviews()
         {
-            List<Review> reviews = await _db.Reviews.ToListAsync();
+            var reviews = await _db.Reviews.ToListAsync();
 
             if (reviews == null)
             {
@@ -31,19 +33,19 @@ namespace UserReviewsWebsiteAPI.Services
             return reviews;
         }
 
-        public async Task<IEnumerable<Review>> GetReview(int id)
+        public async Task<IEnumerable<Review>> GetReviewsWithId(int id)
         {
-            List<Review> reviews = await _db.Reviews.Include(r => r.User).Where(x => x.ProductId == id).ToListAsync();
+            var review = await _db.Reviews.Include(r => r.User).Where(x => x.ProductId == id).ToListAsync();
 
-            if (reviews == null)
+            if (review == null)
             {
                 throw new NotFoundException("Review not found");
             }
 
-            return reviews;
+            return review;
         }
 
-        public async Task AddReview(ReviewDto createReview)
+        public async Task<Review> AddReview(ReviewDto createReview)
         {
             Product product = await _db.Products.FirstOrDefaultAsync(p => p.Id == createReview.ProductId);
 
@@ -60,9 +62,11 @@ namespace UserReviewsWebsiteAPI.Services
 
             await _db.Reviews.AddAsync(review);
             await _db.SaveChangesAsync();
+
+            return review;
         }
 
-        public async Task UpdateReview(int id, ReviewDto updateReview)
+        public async Task<Review> UpdateReview(int id, ReviewDto updateReview)
         {
             int currentUserId = _userContextService.GetUserId;
 
@@ -78,9 +82,10 @@ namespace UserReviewsWebsiteAPI.Services
             review.Score = updateReview.Score;
 
             await _db.SaveChangesAsync();
+            return review;
         }
 
-        public async Task DeleteReview(int id)
+        public async Task<Review> DeleteReview(int id)
         {
             int currentUserId = _userContextService.GetUserId;
 
@@ -93,6 +98,7 @@ namespace UserReviewsWebsiteAPI.Services
 
             _db.Reviews.Remove(review);
             await _db.SaveChangesAsync();
+            return review;
         }
     }
 }

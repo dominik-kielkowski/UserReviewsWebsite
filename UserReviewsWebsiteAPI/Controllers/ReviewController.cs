@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
-using UserReviewsWebsiteAPI.Services;
+using UserReviewsWebsiteAPI.Interfaces;
 
 namespace UserReviewsWebsiteAPI.Controllers
 {
@@ -20,45 +20,45 @@ namespace UserReviewsWebsiteAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetReviews()
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
         {
-            IEnumerable<Review> reviews = await _service.GetReviews();
+            var reviews = await _service.GetReviews();
 
             return Ok(reviews);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetReview(int id)
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviewsWithId(int id)
         {
-            IEnumerable<Review> review = await _service.GetReview(id);
+            var reviews = await _service.GetReviewsWithId(id);
 
-            return Ok(review);
+            return Ok(reviews);
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddReview(ReviewDto createReview)
+        public async Task<ActionResult<Review>> AddReview(ReviewDto createReview)
         {
-            await _service.AddReview(createReview);
+            var review = await _service.AddReview(createReview);
 
-            return Ok();
+            return review;
         }
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateReview(int id, ReviewDto updateReview)
+        public async Task<ActionResult<Review>> UpdateReview(int id, ReviewDto updateReview)
         {
-            await _service.UpdateReview(id, updateReview);
+            var review = await _service.UpdateReview(id, updateReview);
 
-            return Ok();
+            return review;
         }
 
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteReview(int id)
+        public async Task<ActionResult<Review>> DeleteReview(int id)
         {
-            await _service.DeleteReview(id);
+            var review = await _service.DeleteReview(id);
 
-            return Ok();
+            return review;
         }
     }
 }

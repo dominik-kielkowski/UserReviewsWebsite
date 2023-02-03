@@ -1,4 +1,4 @@
-﻿namespace UserReviewsWebsiteAPI.Services
+﻿namespace UserReviewsWebsiteAPI.Interfaces
 {
     public interface IProductScoreService
     {
