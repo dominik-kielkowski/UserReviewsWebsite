@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using UserReviewsWebsiteAPI.Dtos;
 
 namespace UserReviewsWebsiteAPI.Database.Models.Validators
 {

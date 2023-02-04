@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
+using UserReviewsWebsiteAPI.Dtos;
 
 namespace UserReviewsWebsiteAPI.Interfaces
 {

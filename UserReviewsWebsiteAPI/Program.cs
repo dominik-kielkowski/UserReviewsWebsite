@@ -15,6 +15,7 @@ using FluentValidation.AspNetCore;
 using System.Text.Json.Serialization;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using UserReviewsWebsiteAPI.Interfaces;
+using UserReviewsWebsiteAPI.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 

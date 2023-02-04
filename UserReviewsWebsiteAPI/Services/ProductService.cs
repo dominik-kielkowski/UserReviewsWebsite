@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using UserReviewsWebsiteAPI.Database.Data;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
+using UserReviewsWebsiteAPI.Dtos;
 using UserReviewsWebsiteAPI.Exceptions;
 using UserReviewsWebsiteAPI.Interfaces;
 

@@ -1,4 +1,4 @@
-﻿namespace UserReviewsWebsiteAPI.Database.Models
+﻿namespace UserReviewsWebsiteAPI.Dtos
 {
     public class ProductQuery
     {
