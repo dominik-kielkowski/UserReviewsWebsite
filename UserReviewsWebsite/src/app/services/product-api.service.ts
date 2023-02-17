@@ -9,7 +9,9 @@ import { Product } from '../models/product.model';
 })
 export class ProductApiService {
 
+  // readonly productAPIUrl = "https://userreviewswebsiteapi.azurewebsites.net/api";
   readonly productAPIUrl = "https://localhost:7143/api";
+
 
   constructor(private http: HttpClient) { }
 

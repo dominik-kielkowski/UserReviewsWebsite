@@ -1,4 +1,4 @@
-﻿namespace UserReviewsWebsiteAPI
+﻿namespace UserReviewsWebsiteAPI.Settings
 {
     public class AuthenticationSettings
     {

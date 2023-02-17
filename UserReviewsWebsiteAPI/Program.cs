@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using UserReviewsWebsiteAPI.Database.Data;
 using System.Text;
-using UserReviewsWebsiteAPI;
 using UserReviewsWebsiteAPI.Authorization;
 using UserReviewsWebsiteAPI.Database.Models;
 using UserReviewsWebsiteAPI.Middlewere;
@@ -16,6 +15,10 @@ using System.Text.Json.Serialization;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using UserReviewsWebsiteAPI.Interfaces;
 using UserReviewsWebsiteAPI.Dtos;
+using UserReviewsWebsiteAPI.Seeders;
+using UserReviewsWebsiteAPI.Settings;
+using CloudinaryDotNet;
+using UserReviewsWebsiteAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +34,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DevelopmentConnection"));
 });
 
 // Enable CORS
@@ -46,10 +49,12 @@ builder.Services.AddCors(options =>
 });
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
+//Cloudinary cloudinary = new Cloudinary();
 
 builder.Services.AddSingleton(authenticationSettings);
 
 builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
+//builder.Configuration.GetSection("CloudinarySettings").Bind(cloudinary);
 
 builder.Services.AddAuthentication(option =>
 {
@@ -68,24 +73,9 @@ builder.Services.AddAuthentication(option =>
     };
 });
 
-builder.Services.AddControllers().AddFluentValidation();
-builder.Services.AddScoped<RoleSeeder>();
-builder.Services.AddScoped<ErrorHandlingMiddleware>();
-builder.Services.AddScoped<IUserContextService, UserContextService>();
-builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IReviewService, ReviewService>();
-builder.Services.AddScoped<IProductScoreService, ProductScoreService>();
-builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-builder.Services.AddScoped<IValidator<RegisterDto>, UserValidator>();
-builder.Services.AddScoped<IValidator<ReviewDto>, ReviewValidator>();
-builder.Services.AddScoped<IValidator<ProductDto>, ProductValidator>();
-builder.Services.AddScoped<IValidator<ProductQuery>, ProductQueryValidator>();
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 
+builder.Services.AddApplicationService(builder.Configuration);
 
 var app = builder.Build();
 

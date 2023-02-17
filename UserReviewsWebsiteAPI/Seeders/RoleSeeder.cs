@@ -1,7 +1,7 @@
 ﻿using UserReviewsWebsiteAPI.Database.Data;
 using UserReviewsWebsiteAPI.Database.Models;
 
-namespace UserReviewsWebsiteAPI
+namespace UserReviewsWebsiteAPI.Seeders
 {
     public class RoleSeeder
     {

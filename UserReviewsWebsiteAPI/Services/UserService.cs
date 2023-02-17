@@ -9,6 +9,7 @@ using UserReviewsWebsiteAPI.Exceptions;
 using UserReviewsWebsiteAPI.Database.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 using UserReviewsWebsiteAPI.Interfaces;
+using UserReviewsWebsiteAPI.Settings;
 
 namespace UserReviewsWebsiteAPI.Services
 {
